@@ -1,0 +1,109 @@
+@use '../../../utils/variables' as *;
+
+.Header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background: #000b;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+
+    .logo {
+        width: clamp(200px, 300px, 40vw);
+        aspect-ratio: 1288 / 158;
+        mask-image: url('/img/logo/logo-white.svg');
+        mask-repeat: no-repeat;
+        @include stdGradient();
+        position: relative;
+        display: inline-block;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: var(--beforeOpacity);
+            background: linear-gradient(
+                45deg,
+                $pinkLCH,
+                lch(45.64 116.51 313.28)
+            );
+        }
+    }
+
+    .Hamburger {
+        $size: 2.5rem;
+        $thickness: 0.3rem;
+        width: $size;
+        height: $size;
+        position: relative;
+
+        *[class*="Bar"] {
+            background-color: $pink;
+        }
+
+        .TopBar, .BottomBar {
+            width: $size;
+            height: $thickness;
+            background: $pink;
+            position: absolute;
+            border-radius: calc($thickness / 3);
+            transform-origin: 0 50%;
+        }
+
+        .TopBar {
+            top: 0;
+            left: 0;
+        }
+
+        .BottomBar {
+            left: 0;
+            bottom: 0;
+        }
+
+        *[class*='MidBar'] {
+            width: 50%;
+            height: $thickness;
+            position: absolute;
+            top: calc(50% - $thickness / 2);
+        }
+
+        .MidBar1 {
+            left: 0;
+            border-radius: calc($thickness / 3) 0 0 calc($thickness / 3);
+            transform-origin: 0 50%;
+        }
+
+        .MidBar2 {
+            right: 0;
+            border-radius: 0 calc($thickness / 3) calc($thickness / 3) 0;
+            transform-origin: 100% 50%;
+        }
+
+        @supports (corner-shape: bevel) {
+            .TopBar, .BottomBar {
+                corner-shape: bevel;
+                border-radius: calc($thickness / 2) 0;
+            }
+
+            *[class*='MidBar'] {
+                corner-shape: bevel;
+            }
+
+            .MidBar1 {
+                border-radius: calc($thickness / 2) 0 0 0;
+            }
+
+            .MidBar2 {
+                border-radius: 0 0 calc($thickness / 2) 0;
+            }
+        }
+    }
+}
