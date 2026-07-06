@@ -7,7 +7,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    padding: 2rem;
+    padding: 1.5rem;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
@@ -15,6 +15,13 @@
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
+
+    .logo {
+        height: 2rem;
+        width: auto;
+        @include logoMask(#22f, 7rem);
+        display: inline-block;
+    }
 
     .Hamburger {
         $size: 2.5rem;

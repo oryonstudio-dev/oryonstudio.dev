@@ -17,10 +17,18 @@
     gap: $gap;
 }
 
-@mixin maskImage($size, $image) {
-    width: $size;
+@mixin maskImage($image, $color, $size: 2rem, $aspectRatio: 1) {
     height: $size;
+    aspect-ratio: $aspectRatio;
     mask-size: contain;
     mask-position: center;
     mask-image: $image;
+    background-color: $color;
+    mask-repeat: no-repeat;
+}
+
+@mixin logoMask($color, $size) {
+    @include maskImage(url('/logo-blue.svg'), $color, $size, calc(2048 / 1470));
+    mask-size: cover;
+    margin-top: calc(-0.15 * $size);
 }
