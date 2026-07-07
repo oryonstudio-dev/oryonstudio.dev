@@ -1,0 +1,23 @@
+@use './../../utils/variables.scss' as *;
+
+.slide {
+    width: 100%;
+    min-height: 100lvh;
+    box-sizing: border-box;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 5vh clamp(1rem, 5vw, 10vw) 15vh clamp(1rem, 5vw, 10vw);
+
+    .ScrollDownButton {
+        position: absolute;
+        bottom: 5%;
+        left: 0;
+        right: 0;
+        width: auto;
+    } 
+
+    & > :not(.ScrollDownButton) {
+        grid-area: 1 / 1;
+    }
+}
