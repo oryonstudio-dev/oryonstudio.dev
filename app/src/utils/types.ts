@@ -9,3 +9,25 @@ export interface LinkProps {
     active?: boolean,
     visited?: boolean
 }
+
+// Refs and Elements
+ export type H      = HTMLHeadingElement   | null;
+ export type HRef   = React.RefObject<H>;
+
+ export type P      = HTMLParagraphElement | null;
+ export type PRef   = React.RefObject<P>;
+
+ export type Btn    = HTMLButtonElement    | null;
+ export type BtnRef = React.RefObject<Btn>;
+ 
+ export type Any    = HTMLElement          | null;
+ export type AnyRef = React.RefObject<Any>;
+
+ export type Div    = HTMLDivElement       | null;
+ export type DivRef = React.RefObject<Div>;
+
+ export type Li     = HTMLLIElement        | null;
+ export type LiRef  = React.RefObject<Li>;
+
+ export type A      = HTMLAnchorElement    | null;
+ export type ARef   = React.RefObject<A>;
