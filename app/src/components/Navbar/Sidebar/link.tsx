@@ -30,7 +30,7 @@ function SidebarLink({ href, className, onClick, label = 'label', active } : Pro
             duration: 1,
             scrambleText: {
                 text: `${label}${active ? ' █ //current' : ' =>'}`,
-                chars: "0123456789ABCDEF"
+                chars: "ORYON STUDIO"
             }
         });
         setHover(true);
@@ -43,7 +43,7 @@ function SidebarLink({ href, className, onClick, label = 'label', active } : Pro
             duration: 0.5,
             scrambleText: {
                 text: `~/${label}${active ? ' █' : ''}`,
-                chars: "0123456789ABCDEF"
+                chars: "ORYON STUDIO"
             }
         });
     }
