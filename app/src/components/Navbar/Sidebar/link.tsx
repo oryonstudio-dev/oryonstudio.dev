@@ -1,25 +1,63 @@
+'use client';
+
 import { LinkProps } from '@/utils/types';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import styles from './Sidebar.module.scss';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
+import { useRef, useState } from 'react';
+import { A, ARef } from '@/utils/types';
+import { gsap } from 'gsap';
+
+gsap.registerPlugin(ScrambleTextPlugin);
 
 const s = styles;
 
 interface Props extends LinkProps {
-    onMouseEnter?: () => void;
     onClick?: () => void;
 }
 
-function SidebarLink({ children, href, className, active = false, onMouseEnter, onClick } : Props) {
-    const MotionLink = motion.create(Link);
+const MotionLink = motion.create(Link);
+
+function SidebarLink({ href, className, onClick, label = 'label', active = false } : Props) {
+    const linkRef: ARef = useRef<A>(null);
+    const [hover, setHover] = useState<boolean>(false);
+
+    function handleMouseEnter() {
+        gsap.killTweensOf(linkRef.current);
+
+        gsap.to(linkRef.current, {
+            duration: 1,
+            scrambleText: {
+                text: `${label}${active ? ' █ //current' : ' =>'}`,
+                chars: "0123456789ABCDEF"
+            }
+        });
+        setHover(true);
+    }
+
+    function handleMouseLeave() {
+        gsap.killTweensOf(linkRef.current);
+
+        gsap.to(linkRef.current, {
+            duration: 0.5,
+            scrambleText: {
+                text: `~/${label}${active ? ' █' : ''}`,
+                chars: "0123456789ABCDEF"
+            }
+        });
+    }
 
     return (
         <MotionLink
             href={href}
             className={`${className} ${s.link}`}
             onClick={onClick}
+            ref={linkRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
-            { children }
+            ~/{ label }
         </MotionLink>
     );
 }

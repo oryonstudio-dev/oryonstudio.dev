@@ -3,16 +3,17 @@ export interface Children {
 }
 
 export interface LinkProps {
-    href: string,
-    children: React.ReactNode,
+    href:       string,
+    children?:  React.ReactNode,
     className?: string,
-    active?: boolean,
-    visited?: boolean
+    active?:    boolean,
+    visited?:   boolean,
+    label?:     string
 }
 
 export interface LinkTemplate {
-    href: string;
-    label: string;
+    href:   string;
+    label:  string;
 }
 
 // Refs and Elements

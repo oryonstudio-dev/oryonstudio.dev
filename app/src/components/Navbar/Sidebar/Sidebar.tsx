@@ -40,11 +40,11 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     const [activeLink, setActiveLink] = useState(0);
 
     const links: LinkTemplate[] = [
-        { href: '/',           label: 'Home'           },
-        { href: '/about',      label: 'About Us'       },
-        { href: '/experience', label: 'Our Experience' },
-        { href: '/services',   label: 'Our Services'   },
-        { href: '/contact',    label: 'Contact'        }
+        { href: '/',           label: 'home'           },
+        { href: '/about',      label: 'about_us'       },
+        { href: '/experience', label: 'our_experience' },
+        { href: '/services',   label: 'our_services'   },
+        { href: '/contact',    label: 'contact_us'     }
     ];
 
     function createLink(link: LinkTemplate, index: number) {
@@ -53,11 +53,9 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 key={index}
                 onClick={ () => setSidebarOpen(false) }
                 className={s.link}
-                active={ activeLink == index + 1 }
                 href={link.href}
-            >
-                {link.label}
-            </SidebarLink>
+                label={link.label}
+            />
         );
     }
 

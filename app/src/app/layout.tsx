@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Children } from "@/utils/types";
 import "./globals.scss";
 import Navbar from "@/components/Navbar/Navbar";
-import { Raleway, Poppins } from "next/font/google";
+import { Raleway, Poppins, Ubuntu_Sans_Mono, Google_Sans_Code } from "next/font/google";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -10,9 +10,19 @@ const raleway = Raleway({
 });
 
 const poppins = Poppins({
-  subsets: ["latin"],
+  subsets:  ["latin"],
   variable: "--poppins",
-  weight: ["100", "200", "300", "400", "500", "600", "700"]
+  weight:   ["100", "200", "300", "400", "500", "600", "700"]
+});
+
+const ubuntuMono = Ubuntu_Sans_Mono({
+  subsets:  ["latin"],
+  variable: "--ubuntuMono"
+});
+
+const googleCode = Google_Sans_Code({
+  subsets:  ["latin"],
+  variable: "--googleCode"
 });
 
 export const metadata: Metadata = {
@@ -22,7 +32,7 @@ export const metadata: Metadata = {
 
 function RootLayout({ children }: Children) {
   return (
-    <html lang="en" className={`${raleway.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${raleway.variable} ${poppins.variable} ${ubuntuMono.variable} ${googleCode.variable}`}>
       <body>
         <Navbar />
         { children }

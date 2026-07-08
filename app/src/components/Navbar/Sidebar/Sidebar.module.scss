@@ -20,11 +20,14 @@
         .link {
             color: #fff;
             text-decoration: none;
-            text-transform: uppercase;
-            font-family: var(--raleway);
-            font-size: 1.5rem;
-            letter-spacing: 0.3rem;
-            font-weight: 400;
+            font-family: $googleCode;
+            font-size: 1.2rem;
+            letter-spacing: 0.05rem;
+            font-weight: 300;
+
+            .terminalSymbol {
+                color: #888;
+            }
         }
     }
 }
