@@ -53,7 +53,6 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 key={index}
                 onClick={ () => setSidebarOpen(false) }
                 className={s.link}
-                onMouseEnter={ () => setActiveLink(index + 1) }
                 active={ activeLink == index + 1 }
                 href={link.href}
             >

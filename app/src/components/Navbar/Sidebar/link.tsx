@@ -17,7 +17,6 @@ function SidebarLink({ children, href, className, active = false, onMouseEnter, 
         <MotionLink
             href={href}
             className={`${className} ${s.link}`}
-            onMouseEnter={onMouseEnter}
             onClick={onClick}
         >
             { children }
