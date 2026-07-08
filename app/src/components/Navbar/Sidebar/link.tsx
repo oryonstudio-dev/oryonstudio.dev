@@ -19,7 +19,7 @@ interface Props extends LinkProps {
 
 const MotionLink = motion.create(Link);
 
-function SidebarLink({ href, className, onClick, label = 'label', active = false } : Props) {
+function SidebarLink({ href, className, onClick, label = 'label', active } : Props) {
     const linkRef: ARef = useRef<A>(null);
     const [hover, setHover] = useState<boolean>(false);
 
@@ -57,7 +57,7 @@ function SidebarLink({ href, className, onClick, label = 'label', active = false
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            ~/{ label }
+            ~/{ label }{active ? ' █' : ''}
         </MotionLink>
     );
 }

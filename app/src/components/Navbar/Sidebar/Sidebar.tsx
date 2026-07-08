@@ -2,11 +2,12 @@
 
 import styles from './Sidebar.module.scss';
 import SidebarLink from '@/components/Navbar/Sidebar/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Div, DivRef } from '@/utils/types';
+import { usePathname } from 'next/navigation';
 
 const s = styles;
 
@@ -18,6 +19,7 @@ interface Props {
 
 function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     const sidebar: DivRef = useRef<Div>(null);
+    const pathname = usePathname();
 
     useGSAP(() => {
         if (typeof window === 'undefined')  return;
@@ -47,6 +49,17 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
         { href: '/contact',    label: 'contact_us'     }
     ];
 
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        links.map(link => {
+            if (link.href === pathname) {
+                setActiveLink(links.indexOf(link));
+                return;
+            }
+        });
+    }, [pathname]);
+
     function createLink(link: LinkTemplate, index: number) {
         return (
             <SidebarLink
@@ -55,6 +68,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 className={s.link}
                 href={link.href}
                 label={link.label}
+                active={activeLink == index}
             />
         );
     }
