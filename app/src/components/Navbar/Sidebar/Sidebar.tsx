@@ -42,8 +42,8 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     const links: LinkTemplate[] = [
         { href: '/',           label: 'Home'           },
         { href: '/about',      label: 'About Us'       },
-        { href: '/services',   label: 'Our Services'   },
         { href: '/experience', label: 'Our Experience' },
+        { href: '/services',   label: 'Our Services'   },
         { href: '/contact',    label: 'Contact'        }
     ];
 
