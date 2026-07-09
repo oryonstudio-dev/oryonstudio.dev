@@ -1,5 +1,6 @@
 import styles from "./Footer.module.scss";
 import { LinkTemplate } from '@/utils/types';
+import CypherLink from '@/components/links/cypher';
 
 const s = styles;
 
@@ -13,7 +14,11 @@ function Footer() {
     ];
 
     return (
-        <footer className={s.Footer}></footer>
+        <footer className={s.Footer}>
+            <nav>
+                { links.map(link => <CypherLink className={s.link} label={link.label} href={link.href} key={links.indexOf(link)} />)}
+            </nav>
+        </footer>
     );
 }
 

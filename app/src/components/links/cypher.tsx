@@ -29,7 +29,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
         gsap.to(linkRef.current, {
             duration: 1,
             scrambleText: {
-                text: `${label}${active ? ' █ //current' : ' =>'}`,
+                text: `${label}${active ? ' █ //current' : '=>'}`,
                 chars: "ORYON STUDIO"
             }
         });
