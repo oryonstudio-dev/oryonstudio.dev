@@ -16,3 +16,5 @@ function Slide({ children, className, ref, id } : Props) {
         </section>
     );
 }
+
+export default Slide;

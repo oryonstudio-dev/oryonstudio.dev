@@ -30,7 +30,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
             duration: 1,
             scrambleText: {
                 text: `${label}${active ? ' █ //current' : '=>'}`,
-                chars: "ORYON STUDIO"
+                chars: "ORYONSTUDIO"
             }
         });
         setHover(true);
@@ -43,7 +43,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
             duration: 0.5,
             scrambleText: {
                 text: `~/${label}${active ? ' █' : ''}`,
-                chars: "ORYON STUDIO"
+                chars: "ORYONSTUDIO"
             }
         });
     }
