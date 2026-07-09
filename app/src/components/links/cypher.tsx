@@ -6,8 +6,9 @@ import { motion } from 'motion/react';
 import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useRef } from 'react';
-import { A, ARef } from '@/utils/types';
+import { A, ARef, Any, AnyRef } from '@/utils/types';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
@@ -21,30 +22,39 @@ const MotionLink = motion.create(Link);
 
 function CypherLink({ href, className, onClick, label = 'label', active } : Props) {
     const linkRef: ARef = useRef<A>(null);
+    const textRef: AnyRef = useRef<Any>(null);
 
-    function handleMouseEnter() {
-        gsap.killTweensOf(linkRef.current);
+    const { contextSafe } = useGSAP({ scope: textRef })
 
-        gsap.to(linkRef.current, {
+    const handleMouseEnter = contextSafe(() => {
+        if (!textRef.current) return;
+
+        gsap.killTweensOf(textRef.current);
+
+        gsap.to(textRef.current, {
             duration: 1,
             scrambleText: {
                 text: `${label}${active ? ' █ //current' : '=>'}`,
                 chars: "ORYONSTUDIO"
             }
         });
-    }
+    });
 
-    function handleMouseLeave() {
-        gsap.killTweensOf(linkRef.current);
+    const handleMouseLeave = contextSafe(() => {
+        if (!textRef.current) return;
 
-        gsap.to(linkRef.current, {
+        gsap.killTweensOf(textRef.current);
+
+        gsap.to(textRef.current, {
             duration: 0.5,
             scrambleText: {
                 text: `~/${label}${active ? ' █' : ''}`,
                 chars: "oryonstudio"
             }
         });
-    }
+    });
+
+    const initialText = `~/${ label }${active ? ' █' : ''}`;
 
     return (
         <MotionLink
@@ -55,7 +65,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            ~/{ label }{active ? ' █' : ''}
+            <span className={s.text} ref={textRef} dangerouslySetInnerHTML={{ __html: initialText }} />
         </MotionLink>
     );
 }
