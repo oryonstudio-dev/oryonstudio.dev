@@ -52,18 +52,9 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
         { href: '/contact',    label: t('contact')    }
     ];
 
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        links.map(link => {
-            if (pathname.includes(link.href)) {
-                setActiveLink(links.indexOf(link));
-                return;
-            }
-        });
-    }, [pathname]);
-
     function createLink(link: LinkTemplate, index: number) {
+        const isHome = pathname.length == 3 && link.href == '/';
+
         return (
             <CypherLink
                 key={index}
@@ -71,10 +62,14 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 className={s.link}
                 href={link.href}
                 label={link.label}
-                active={activeLink == index}
+                active={pathname.substring(3) === link.href || isHome}
             />
         );
     }
+
+    useEffect(() => {
+    console.log(pathname);
+    }, [pathname]);
 
     return (
         <div className={s.Sidebar} style={{ paddingTop: headerHeight }} onMouseLeave={ () => setActiveLink(0) } ref={sidebar}>

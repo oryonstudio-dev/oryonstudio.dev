@@ -24,7 +24,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
     const linkRef: ARef = useRef<A>(null);
     const textRef: AnyRef = useRef<Any>(null);
 
-    const { contextSafe } = useGSAP({ scope: textRef })
+    const { contextSafe } = useGSAP();
 
     const handleMouseEnter = contextSafe(() => {
         if (!textRef.current) return;
