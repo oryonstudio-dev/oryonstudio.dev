@@ -1,7 +1,7 @@
 'use client';
 
 import { LinkProps } from '@/utils/types';
-import Link from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { motion } from 'motion/react';
 import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';

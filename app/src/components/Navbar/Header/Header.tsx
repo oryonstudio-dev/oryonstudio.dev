@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Link from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 
 const s = styles;
 
