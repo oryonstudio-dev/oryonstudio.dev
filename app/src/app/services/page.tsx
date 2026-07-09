@@ -1,0 +1,14 @@
+import styles from './page.module.scss';
+import Slide from '@/components/Slide/Slide';
+
+const s = styles;
+
+function Services() {
+    return (
+        <Slide className={s.Hero}>
+          <h1>page under construction <span className={s.pointer}>█</span></h1>
+        </Slide>
+    );
+}
+
+export default Services;
