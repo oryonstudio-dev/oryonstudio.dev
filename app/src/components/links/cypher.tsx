@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { A, ARef } from '@/utils/types';
 import { gsap } from 'gsap';
 
