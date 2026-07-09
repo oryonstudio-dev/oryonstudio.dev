@@ -21,7 +21,6 @@ const MotionLink = motion.create(Link);
 
 function CypherLink({ href, className, onClick, label = 'label', active } : Props) {
     const linkRef: ARef = useRef<A>(null);
-    const [hover, setHover] = useState<boolean>(false);
 
     function handleMouseEnter() {
         gsap.killTweensOf(linkRef.current);
@@ -33,7 +32,6 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
                 chars: "ORYONSTUDIO"
             }
         });
-        setHover(true);
     }
 
     function handleMouseLeave() {
