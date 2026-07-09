@@ -43,7 +43,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
             duration: 0.5,
             scrambleText: {
                 text: `~/${label}${active ? ' █' : ''}`,
-                chars: "ORYONSTUDIO"
+                chars: "oryonstudio"
             }
         });
     }
