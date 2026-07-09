@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Div, DivRef } from '@/utils/types';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const s = styles;
 
@@ -39,14 +40,16 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
         }
     }, { dependencies: [open] });
 
+    const t = useTranslations('global.links');
+
     const [activeLink, setActiveLink] = useState(0);
 
     const links: LinkTemplate[] = [
-        { href: '/',           label: 'home'           },
-        { href: '/about',      label: 'about_us'       },
-        { href: '/experience', label: 'our_experience' },
-        { href: '/services',   label: 'our_services'   },
-        { href: '/contact',    label: 'contact_us'     }
+        { href: '/',           label: t('home')       },
+        { href: '/about',      label: t('about')      },
+        { href: '/experience', label: t('experience') },
+        { href: '/services',   label: t('services')   },
+        { href: '/contact',    label: t('contact')    }
     ];
 
     useEffect(() => {

@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
-import { Children } from "@/utils/types";
-import "./globals.scss";
+import "../globals.scss";
 import Navbar from "@/components/Navbar/Navbar";
 import { Raleway, Poppins, Ubuntu_Sans_Mono, Google_Sans_Code } from "next/font/google";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import type { Locale } from '@/i18n/types';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -17,11 +25,6 @@ const poppins = Poppins({
   weight:   ["100", "200", "300", "400", "500", "600", "700"]
 });
 
-const ubuntuMono = Ubuntu_Sans_Mono({
-  subsets:  ["latin"],
-  variable: "--ubuntuMono"
-});
-
 const googleCode = Google_Sans_Code({
   subsets:  ["latin"],
   variable: "--googleCode"
@@ -32,12 +35,21 @@ export const metadata: Metadata = {
   description: "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out.",
 };
 
-function RootLayout({ children }: Children) {
+async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+
+  const isLocale = routing.locales.includes(locale as Locale);
+  if (!isLocale) notFound();
+
+  const messages = await getMessages({ locale });
+
   return (
-    <html lang="en" className={`${raleway.variable} ${poppins.variable} ${ubuntuMono.variable} ${googleCode.variable}`}>
+    <html lang={locale} className={`${raleway.variable} ${poppins.variable} ${googleCode.variable}`}>
       <body>
-        <Navbar />
-        { children }
+        <NextIntlClientProvider messages={messages}>
+          <Navbar />
+          {children}
+        </NextIntlClientProvider>
         <SpeedInsights />
         <Analytics />
       </body>

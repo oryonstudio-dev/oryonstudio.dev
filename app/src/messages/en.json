@@ -1,0 +1,61 @@
+{
+    "global": {
+        "links": {
+            "home": "home",
+            "about": "about_us",
+            "contact": "contact_us",
+            "experience": "our_experience",
+            "services": "our_services"
+        }
+    },
+
+    "home": {
+        "metadata": {
+            "title": "ORYON STUDIO | Premium Next.js Web Design & Development",
+            "description": "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out."
+        },
+        "content": {
+            "page under construction": "page under construction"
+        }
+    },
+
+    "about": {
+        "metadata": {
+            "title": "ORYON STUDIO | Premium Next.js Web Design & Development",
+            "description": "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out."
+        },
+        "content": {
+            "page under construction": "page under construction"
+        }
+    },
+
+    "contact": {
+        "metadata": {
+            "title": "ORYON STUDIO | Premium Next.js Web Design & Development",
+            "description": "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out."
+        },
+        "content": {
+            "page under construction": "page under construction"
+        }
+    },
+
+    "experience": {
+        "metadata": {
+            "title": "ORYON STUDIO | Premium Next.js Web Design & Development",
+            "description": "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out."
+        },
+        "content": {
+            "page under construction": "page under construction"
+        }
+    },
+
+    "services": {
+        "metadata": {
+            "title": "ORYON STUDIO | Premium Next.js Web Design & Development",
+            "description": "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out."
+        },
+        "content": {
+            "page under construction": "page under construction"
+        }
+    }
+}

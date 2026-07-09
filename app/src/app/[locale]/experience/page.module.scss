@@ -1,4 +1,4 @@
-@use '../../utils/variables.scss' as *;
+@use '../../../utils/variables.scss' as *;
 
 .Hero {
     @include flexAlign(center, center, center);

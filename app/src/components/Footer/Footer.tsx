@@ -1,16 +1,19 @@
 import styles from "./Footer.module.scss";
 import { LinkTemplate } from '@/utils/types';
 import CypherLink from '@/components/links/cypher';
+import { useTranslations } from 'next-intl';
 
 const s = styles;
 
 function Footer() {
+    const t = useTranslations('global.links');
+
     const links: LinkTemplate[] = [
-        { href: '/', label:'home' },
-        { href: '/about', label: 'about_us' },
-        { href: '/experience', label: 'our_experience' },
-        { href: '/services', label: 'our_services' },
-        { href: '/contact', label: 'contact_us'}
+        { href: '/',           label: t('home')       },
+        { href: '/about',      label: t('about')      },
+        { href: '/experience', label: t('experience') },
+        { href: '/services',   label: t('services')   },
+        { href: '/contact',    label: t('contact')    }
     ];
 
     return (
