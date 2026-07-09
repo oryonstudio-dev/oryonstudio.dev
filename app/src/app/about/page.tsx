@@ -5,7 +5,7 @@ const s = styles;
 
 function About() {
     return (
-        <Slide>
+        <Slide className={s.Hero}>
           <h1>page under construction <span className={s.pointer}>█</span></h1>
         </Slide>
     );
