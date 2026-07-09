@@ -4,7 +4,16 @@ import "./globals.scss";
 import Navbar from "@/components/Navbar/Navbar";
 import { Raleway, Poppins, Ubuntu_Sans_Mono, Google_Sans_Code } from "next/font/google";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import { Locale } from '@/i18n/types';
+
+export function generateStaticParams() {
+  return routing.locales.map(locale => { locale });
+}
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -32,12 +41,19 @@ export const metadata: Metadata = {
   description: "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out.",
 };
 
-function RootLayout({ children }: Children) {
+async function RootLayout({ children, params }: { children: React.ReactNode, params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params;
+  if (!routing.locales.includes(locale)) notFound();
+
+  const messages = await getMessages();
+
   return (
     <html lang="en" className={`${raleway.variable} ${poppins.variable} ${ubuntuMono.variable} ${googleCode.variable}`}>
       <body>
-        <Navbar />
-        { children }
+        <NextIntlClientProvider messages={messages}>
+          <Navbar />
+          { children }
+        </NextIntlClientProvider>
         <SpeedInsights />
         <Analytics />
       </body>
