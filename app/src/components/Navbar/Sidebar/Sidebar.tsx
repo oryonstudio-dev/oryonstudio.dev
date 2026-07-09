@@ -56,7 +56,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
         if (typeof window === 'undefined') return;
 
         links.map(link => {
-            if (link.href === pathname) {
+            if (pathname.includes(link.href)) {
                 setActiveLink(links.indexOf(link));
                 return;
             }
