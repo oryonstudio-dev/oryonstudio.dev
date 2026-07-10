@@ -8,7 +8,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import type { Locale, MetadataProps } from '@/i18n/types';
+import { Locale, MetadataProps } from '@/i18n/types';
 import { getTranslations } from 'next-intl/server';
 
 export function generateStaticParams() {
