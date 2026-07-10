@@ -8,7 +8,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { Locale, MetadataProps } from '@/i18n/types';
+import { Locale, MetadataParams } from '@/i18n/types';
 import { getTranslations } from 'next-intl/server';
 
 export function generateStaticParams() {
@@ -31,7 +31,7 @@ const googleCode = Google_Sans_Code({
   variable: "--googleCode"
 });
 
-export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: MetadataParams): Promise<Metadata> {
   const { locale } = await params;
   if (!routing.locales.includes(locale as Locale)) notFound();
   const t = await getTranslations({ locale, namespace: "home.metadata" });

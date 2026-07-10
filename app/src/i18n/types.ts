@@ -1,4 +1,4 @@
 export type Locale = 'pl' | 'en';
-export interface MetadataProps {
+export interface MetadataParams {
     params: Promise<{ locale: string }>
 }
