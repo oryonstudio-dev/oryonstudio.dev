@@ -121,7 +121,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
                         height: rem(hamburgerLineThickness / 2),
                         width: '30%',
                         duration: 0.25,
-                        ease: 'power4.in',
+                        ease: 'power1.in',
                         easeReverse: true
                     }, '<')
                     .to(midBar2.current, {
@@ -131,19 +131,19 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
                         height: rem(hamburgerLineThickness / 2),
                         width: '30%',
                         duration: 0.25,
-                        ease: 'power4.in',
+                        ease: 'power1.in',
                         easeReverse: true
                     }, '<')
                     .to(topBar.current, {
                         rotate: 45,
                         duration: 0.3,
-                        ease: 'power4.inOut',
+                        ease: 'power1.inOut',
                         easeReverse: true
                     }, '<')
                     .to(bottomBar.current, {
                         rotate: -45,
                         duration: 0.3,
-                        ease: 'power3.inOut',
+                        ease: 'power1.inOut',
                         easeReverse: true
                     }, '<')
                     .to(topBar.current, {
