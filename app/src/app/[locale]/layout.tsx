@@ -6,10 +6,9 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import { MetadataParams } from '@/i18n/types';
+import { readMetadata, checkLocale } from '@/i18n/functions';
 import { routing } from '@/i18n/routing';
-import { Locale, MetadataParams } from '@/i18n/types';
-import { readMetadata } from '@/i18n/functions';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -33,15 +32,14 @@ const googleCode = Google_Sans_Code({
 
 export async function generateMetadata({ params }: MetadataParams): Promise<Metadata> {
   const { locale } = await params;
-  if (!routing.locales.includes(locale as Locale)) notFound();
+  checkLocale(locale);
   return readMetadata('home');
 }
 
 async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
-  const isLocale = routing.locales.includes(locale as Locale);
-  if (!isLocale) notFound();
+  checkLocale(locale);
 
   const messages = await getMessages({ locale });
 
