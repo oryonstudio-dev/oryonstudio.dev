@@ -1,6 +1,7 @@
 import styles from './page.module.scss';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
+import LiquidAurora from '@/components/shaders/LiquidAurora';
 
 const s = styles;
 
@@ -9,7 +10,8 @@ function Experience() {
 
     return (
         <Slide className={s.Hero}>
-          <h1>{ t('page under construction') } <span className={s.pointer}>█</span></h1>
+            <LiquidAurora />
+            <h1>{ t('page under construction') } <span className={s.pointer}>█</span></h1>
         </Slide>
     );
 }
