@@ -1,7 +1,7 @@
 import styles from './page.module.scss';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
-import LiquidAurora from '@/components/shaders/LiquidAurora';
+import LiquidPlasma from '@/components/shaders/LiquidPlasma';
 
 const s = styles;
 
@@ -10,7 +10,7 @@ function Services() {
 
     return (
         <Slide className={s.Hero}>
-            <LiquidAurora />
+            <LiquidPlasma />
             <h1>{ t('page under construction') } <span className={s.pointer}>█</span></h1>
         </Slide>
     );
