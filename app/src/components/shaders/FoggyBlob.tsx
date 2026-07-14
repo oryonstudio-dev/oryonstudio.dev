@@ -20,7 +20,7 @@ function FoggyBlob() {
                 colorB='#33f'
             />
             <Fog
-                colorA='#00fa'
+                colorA='#00fd'
                 colorB='#0000'
             />
         </Shader>
