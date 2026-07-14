@@ -1,0 +1,23 @@
+'use client';
+
+import { LiquidMetal } from '@paper-design/shaders-react';
+
+function LiquidMetalLogo() {
+    return (
+        <LiquidMetal 
+            image='/logo-sdf.png'
+            colorBack='#ffffff00'
+            scale={1}
+            style={{
+                width: '10rem',
+                height: '10rem',
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
+            }}
+        />
+    );
+}
+
+export default LiquidMetalLogo
