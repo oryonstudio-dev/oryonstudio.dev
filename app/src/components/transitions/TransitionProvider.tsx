@@ -9,56 +9,66 @@ import { mapArray } from '@/utils/functions';
 
 const s = styles;
 const rows = 4;
+const eases = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
 
 function TransitionProvider({ children }: Children) {
     const gridRef: DivRef = useRef(null);
     const blocksRefs: DivRef[] = Array.from({ length: rows }, () => useRef(null));
 
-    function animateIn(onComplete: () => void) {
-        const tl = gsap.timeline({ onComplete });
+    const animate: {
+        in:  (onComplete: () => void) => gsap.core.Timeline;
+        out: (onComplete: () => void) => gsap.core.Timeline;
+    } = {
+        in: (onComplete: () => void) => {
+            const tl = gsap.timeline({ onComplete });
+            const blocks = mapArray(blocksRefs)
 
-        tl.set(mapArray(blocksRefs), {
-            transformOrigin: 'left center',
-            scaleX: 0
-        });
+            tl.set(blocks, {
+                transformOrigin: 'left center',
+                scaleX: 0
+            });
 
-        tl.to(mapArray(blocksRefs), {
-            scaleX: 1,
-            duration: 1,
-            ease: 'power4.out',
-            stagger: 0.075
-        });
+            blocks.forEach((block, index) => {
+                tl.to(block, {
+                    scaleX: 1,
+                    duration: 1,
+                    ease: gsap.utils.random(eases),
+                }, '<0.1');
+            });
 
-        return tl;
-    }
+            return tl;
+        },
 
-    function animateOut(onComplete: () => void) {
-        const tl = gsap.timeline({ onComplete });
+        out: (onComplete: () => void) => {
+            const tl = gsap.timeline({ onComplete });
+            const blocks = mapArray(blocksRefs)
 
-        tl.set(mapArray(blocksRefs), {
-            transformOrigin: 'right center',
-            scaleX: 1
-        });
+            tl.set(blocks, {
+                transformOrigin: 'right center',
+                scaleX: 1
+            });
 
-        tl.to(mapArray(blocksRefs), {
-            scaleX: 0,
-            duration: 1,
-            ease: 'power4.out',
-            stagger: 0.075
-        });
-
-        return tl;
+            blocks.forEach((block, index) => {
+                tl.to(block, {
+                    scaleX: 0,
+                    duration: 1,
+                    ease: gsap.utils.random(eases),
+                }, '<0.1');
+            });
+            
+            return tl;
+        }
     }
 
     return (
         <TransitionRouter 
             auto
             leave={next => {
-                const tl = animateIn(next);
+                const tl = animate.in(next);
                 return () => tl.kill();
             }}
             enter={next => {
-                const tl = animateOut(next);
+                const tl = animate.out(next);
                 return () => tl.kill();
             }}
         >
