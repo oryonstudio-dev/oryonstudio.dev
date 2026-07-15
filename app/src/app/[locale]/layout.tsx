@@ -9,6 +9,7 @@ import { getMessages } from 'next-intl/server';
 import { MetadataParams } from '@/i18n/types';
 import { readMetadata, checkLocale } from '@/i18n/functions';
 import { routing } from '@/i18n/routing';
+import TransitionProvider from "@/components/transitions/TransitionProvider";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -47,8 +48,10 @@ async function RootLayout({ children, params }: { children: React.ReactNode; par
     <html lang={locale} className={`${raleway.variable} ${poppins.variable} ${googleCode.variable}`}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          {children}
+          <TransitionProvider>
+            <Navbar />
+            {children}
+          </TransitionProvider>
         </NextIntlClientProvider>
         <SpeedInsights />
         <Analytics />
