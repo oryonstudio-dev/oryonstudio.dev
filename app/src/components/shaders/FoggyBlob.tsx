@@ -1,20 +1,11 @@
 'use client';
 
-import { Shader, Blob, Fog } from 'shaders/react';
+import { Blob, Fog } from 'shaders/react';
+import ShaderWrapper from './ShaderWrapper';
 
 function FoggyBlob() {
     return (
-        <Shader 
-            style={{
-                position: 'absolute',
-                width: '110vw',
-                height: '110vh',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: -1
-            }}
-        >
+        <ShaderWrapper>
             <Blob
                 colorA='#00f'
                 colorB='#33f'
@@ -23,7 +14,7 @@ function FoggyBlob() {
                 colorA='#00fd'
                 colorB='#0000'
             />
-        </Shader>
+        </ShaderWrapper>
     );
 }
 

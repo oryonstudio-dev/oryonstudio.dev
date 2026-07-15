@@ -1,20 +1,11 @@
 'use client';
 
-import { Shader, Aurora, ChromaFlow } from 'shaders/react';
+import { Aurora, ChromaFlow } from 'shaders/react';
+import ShaderWrapper from './ShaderWrapper';
 
 function LiquidAurora() {
     return (
-        <Shader 
-            style={{
-                position: 'absolute',
-                width: '110vw',
-                height: '110vh',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: -1
-            }}
-        >
+        <ShaderWrapper>
             <Aurora
                 colorA='#00f'
                 colorB='#44f'
@@ -28,7 +19,7 @@ function LiquidAurora() {
                 rightColor='#14f'
                 intensity={0.3}
             />
-        </Shader>
+        </ShaderWrapper>
     );
 }
 

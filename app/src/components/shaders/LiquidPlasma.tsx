@@ -1,20 +1,11 @@
 'use client';
 
-import { Shader, Plasma, Liquify } from 'shaders/react';
+import { Plasma, Liquify } from 'shaders/react';
+import ShaderWrapper from './ShaderWrapper';
 
 function LiquidGradient() {
     return (
-        <Shader
-            style={{
-                position: 'absolute',
-                width: '110vw',
-                height: '110vh',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: -1
-            }}
-        >
+        <ShaderWrapper>
             <Plasma
                 colorA='#00f'
                 colorB='#000'
@@ -24,7 +15,7 @@ function LiquidGradient() {
                 speed={1}
             />
             <Liquify />
-        </Shader>
+        </ShaderWrapper>
     )
 }
 
