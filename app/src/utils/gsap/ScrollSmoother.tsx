@@ -8,7 +8,12 @@ import { useRef } from 'react';
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
-function ScrollSmootherWrapper({ children } : { children: React.ReactNode }) {
+interface Props {
+    children: React.ReactNode,
+    effects?: boolean
+}
+
+function ScrollSmootherWrapper({ children, effects = false}: Props) {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +26,7 @@ function ScrollSmootherWrapper({ children } : { children: React.ReactNode }) {
             content: contentRef.current,
             smooth: 1.5,
             smoothTouch: 0.1,
-            effects: true
+            effects: effects
         });
     }, { scope: wrapperRef });
 
