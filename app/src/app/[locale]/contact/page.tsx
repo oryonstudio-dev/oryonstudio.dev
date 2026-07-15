@@ -1,8 +1,9 @@
 import styles from './page.module.scss';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
-import LiquidAurora from '@/components/shaders/LiquidAurora';
-import FoggyBlob from '@/components/shaders/FoggyBlob';
+
+import dynamic from 'next/dynamic';
+const FoggyBlob = dynamic(() => import('@/components/shaders/FoggyBlob'), { ssr: false });
 
 const s = styles;
 

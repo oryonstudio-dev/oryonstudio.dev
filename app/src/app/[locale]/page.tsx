@@ -3,7 +3,9 @@ import ScrollSmootherWrapper from '@/utils/gsap/ScrollSmoother';
 import Footer from '@/components/Footer/Footer';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
-import FoggyBlob from '@/components/shaders/FoggyBlob';
+
+import dynamic from 'next/dynamic';
+const FoggyBlob = dynamic(() => import('@/components/shaders/FoggyBlob'), { ssr: false });
 
 const s = styles;
 
