@@ -49,7 +49,7 @@ function LogoDraw({ active, color = '#00f', strokeWidth = 10, fill = color }: Pr
     return (
         <svg
             width="100%"
-            height="auto"
+            height="100%"
             viewBox="0 0 3129.21 2184.8"
             style={{ overflow: 'visible' }}
         >
