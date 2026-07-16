@@ -2,13 +2,11 @@ import { gsap } from 'gsap';
 import { ARef } from '@/utils/types';
 
 export const linksColumnSlide: {
-    in:  (elements: ARef[]) => gsap.core.Tween,
-    out: (elements: ARef[]) => gsap.core.Tween
+    in:  (elements: React.RefObject<ARef[]>) => gsap.core.Tween,
+    out: (elements: React.RefObject<ARef[]>) => gsap.core.Tween
 } = {
-    in: (elements: ARef[]): gsap.core.Tween => {
-        const targets = elements!.map(element => element!.current).filter(Boolean);
-
-        return gsap.fromTo(targets, {
+    in: (elements: React.RefObject<ARef[]>): gsap.core.Tween => {
+        return gsap.fromTo(elements.current, {
             x: index => index % 2 == 0 ? 50 : -50,
             opacity: 0
         }, {
@@ -19,10 +17,8 @@ export const linksColumnSlide: {
             ease: 'power1.out'
         });
     },
-    out: (elements: ARef[]): gsap.core.Tween => {
-        const targets = elements!.map(element => element!.current).filter(Boolean);
-
-        return gsap.fromTo(targets, {
+    out: (elements: React.RefObject<ARef[]>): gsap.core.Tween => {
+        return gsap.fromTo(elements.current, {
             x: 0,
             opacity: 1,
         }, {
