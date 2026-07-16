@@ -28,7 +28,7 @@ function ScrollSmootherWrapper({ children, effects = false}: Props) {
             smoothTouch: 0.1,
             effects: effects
         });
-    }, { scope: wrapperRef });
+    });
 
     return (
         <div ref={wrapperRef} id="smooth-wrapper" style={{ position: 'fixed', overflow: 'hidden', width: '100%', height: '100%', inset: 0 }}>
