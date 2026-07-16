@@ -1,7 +1,10 @@
 'use client';
 
-import { Blob, Fog } from 'shaders/react';
 import ShaderWrapper from './ShaderWrapper';
+
+import dynamic from 'next/dynamic';
+const Blob = dynamic(() => import('shaders/react').then(mod => mod.Blob));
+const Fog  = dynamic(() => import('shaders/react').then(mod => mod.Fog));
 
 function FoggyBlob() {
     return (

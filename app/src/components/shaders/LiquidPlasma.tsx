@@ -1,7 +1,10 @@
 'use client';
 
-import { Plasma, Liquify } from 'shaders/react';
 import ShaderWrapper from './ShaderWrapper';
+
+import dynamic from 'next/dynamic';
+const Plasma  = dynamic(() => import('shaders/react').then(mod => mod.Plasma));
+const Liquify = dynamic(() => import('shaders/react').then(mod => mod.Liquify));
 
 function LiquidGradient() {
     return (

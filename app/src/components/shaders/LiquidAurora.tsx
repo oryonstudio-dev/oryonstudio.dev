@@ -1,7 +1,10 @@
 'use client';
 
-import { Aurora, ChromaFlow } from 'shaders/react';
 import ShaderWrapper from './ShaderWrapper';
+
+import dynamic from 'next/dynamic';
+const Aurora     = dynamic(() => import('shaders/react').then(mod => mod.Aurora));
+const ChromaFlow = dynamic(() => import('shaders/react').then(mod => mod.ChromaFlow));
 
 function LiquidAurora() {
     return (

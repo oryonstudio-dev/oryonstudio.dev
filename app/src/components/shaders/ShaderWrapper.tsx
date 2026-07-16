@@ -3,7 +3,9 @@
 import { DeviceSpecs } from '@/utils/types';
 import { useDeviceSpecs } from '@/utils/functions';
 import { useState, useEffect } from 'react';
-import { Shader } from 'shaders/react';
+
+import dynamic from 'next/dynamic';
+const Shader = dynamic(() => import('shaders/react').then(mod => mod.Shader));
 
 interface Props {
     children: React.ReactNode,

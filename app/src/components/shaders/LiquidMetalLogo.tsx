@@ -1,6 +1,7 @@
 'use client';
 
-import { LiquidMetal } from '@paper-design/shaders-react';
+import dynamic from 'next/dynamic';
+const LiquidMetal = dynamic(() => import('@paper-design/shaders-react').then(mod => mod.LiquidMetal));
 
 function LiquidMetalLogo() {
     return (
