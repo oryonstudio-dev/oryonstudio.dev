@@ -47,7 +47,5 @@ export function useDeviceSpecs(): DeviceSpecs {
         });
     }, []);
 
-    console.log(specs);
-
     return specs;
 }
