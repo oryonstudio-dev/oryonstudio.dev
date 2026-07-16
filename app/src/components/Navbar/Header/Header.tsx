@@ -66,21 +66,28 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
 
     useEffect(() => {
         let lastScroll = 0;
+        let ticked = false;
 
         function handleScroll() {
-            let currentScroll = window.scrollY;
+            if (!ticked) {
+                window.requestAnimationFrame(() => {
+                    const currentScroll = window.scrollY;
 
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                setHeaderHidden(true);
-            } else {
-                setHeaderHidden(false);
+                    if (currentScroll > lastScroll && currentScroll > 100) {
+                        setHeaderHidden(true);
+                    } else {
+                        setHeaderHidden(false);
+                    }
+
+                    lastScroll = currentScroll;
+                    ticked = false;
+                });
+
+                ticked = true;
             }
-
-            lastScroll = currentScroll;
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
