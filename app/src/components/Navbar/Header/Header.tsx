@@ -1,25 +1,26 @@
 'use client';
 
 import styles from './Header.module.scss';
-import { motion } from 'motion/react';
-import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { useState, useEffect } from 'react';
 import { Link } from '@/i18n/navigation';
 import LogoDraw from '@/components/LogoDraw';
 
 const s = styles;
 
 interface Props {
-    setSidebarOpen: (open: boolean) => void,
-    sidebarOpen: boolean
+    setSidebarOpen: (open: boolean) => void;
+    sidebarOpen: boolean;
 }
 
-function Header({ setSidebarOpen, sidebarOpen } : Props) {
+function Header({ setSidebarOpen, sidebarOpen }: Props) {
     const [hamburgerState, setHamburgerState] = useState(false);
-    const [headerHidden, setHeaderHidden]     = useState(false);
+    const [headerHidden, setHeaderHidden] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
 
     function toggleHamburger() {
+        if (!hasInteracted) {
+            setHasInteracted(true);
+        }
         if (!headerHidden) {
             setHamburgerState(prev => !prev);
         } else {
@@ -33,13 +34,6 @@ function Header({ setSidebarOpen, sidebarOpen } : Props) {
             setHeaderHidden(false);
         }
     }, [sidebarOpen]);
-
-    const [supportsCornerShape, setSupportsCornerShape] = useState(false);
-    useEffect(() => {
-        if (typeof CSS != 'undefined') {
-            setSupportsCornerShape(CSS.supports('corner-shape', 'bevel'));
-        }
-    }, []);
 
     useEffect(() => {
         setSidebarOpen(hamburgerState);
@@ -72,98 +66,18 @@ function Header({ setSidebarOpen, sidebarOpen } : Props) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const hamburger = useRef<HTMLButtonElement>(null);
-    const topBar    = useRef<HTMLDivElement>(null);
-    const midBar1   = useRef<HTMLDivElement>(null);
-    const midBar2   = useRef<HTMLDivElement>(null);
-    const bottomBar = useRef<HTMLDivElement>(null);
-
-    const onTl = useRef<gsap.core.Timeline | null>(null);
-
-    const hamburgerLineThickness = 0.3;
-
-    function rem(size: number) {
-        return String(size) + 'rem';
-    }
-
-    useGSAP(() => {
-        if (!hamburger.current || !topBar.current || !bottomBar.current || !midBar1.current || !midBar2.current || typeof window === 'undefined') return;
-
-        onTl.current = gsap.timeline({ paused: true })
-            .to(hamburger.current, {
-                rotateZ: -360 * 2 + 90,
-                ease: 'power1.out',
-                easeReverse: 'ease.InOut',
-                duration: 1
-            })
-            .to([topBar.current, bottomBar.current], {
-                borderRadius: rem(hamburgerLineThickness / (supportsCornerShape ? 2 : 3)),
-                duration: 1,
-                ease: 'power4.inOut',
-                easeReverse: true
-            }, '<')
-            .to(midBar1.current, {
-                x: '-100%',
-                y: '50%',
-                borderRadius: rem(hamburgerLineThickness / 3),
-                height: rem(hamburgerLineThickness / 2),
-                width: '30%',
-                duration: 0.25,
-                ease: 'power1.in',
-                easeReverse: true
-            }, '<')
-            .to(midBar2.current, {
-                x: '100%',
-                y: '50%',
-                borderRadius: rem(hamburgerLineThickness / 3),
-                height: rem(hamburgerLineThickness / 2),
-                width: '30%',
-                duration: 0.25,
-                ease: 'power1.in',
-                easeReverse: true
-            }, '<')
-            .to(topBar.current, {
-                rotate: 45,
-                duration: 0.3,
-                ease: 'power1.inOut',
-                easeReverse: true
-            }, '<')
-            .to(bottomBar.current, {
-                rotate: -45,
-                duration: 0.3,
-                ease: 'power1.inOut',
-                easeReverse: true
-            }, '<')
-            .to(topBar.current, {
-                x: rem(hamburgerLineThickness * 1.2),
-                y: rem(hamburgerLineThickness / 2 * 1.2),
-                duration: 0.3,
-                ease: 'power1.inOut',
-                easeReverse: true
-            }, '<')
-            .to(bottomBar.current, {
-                x: rem(hamburgerLineThickness * 1.2),
-                y: rem(-hamburgerLineThickness / 2 * 1.2),
-                duration: 0.3,
-                ease: 'power2.inOut',
-                easeReverse: true
-            }, '<');
-    }, { dependencies: [] });
-
-    useGSAP(() => {
-        if (!onTl.current) return;
-
-        if (hamburgerState) {
-            onTl.current.play();
-        } else {
-            onTl.current.reverse();
-        }
-
-    }, { dependencies: [hamburgerState] });
+    const hamburgerClassName = [
+        s.Hamburger,
+        'btn',
+        hasInteracted ? (hamburgerState ? s.active : s.inactive) : ''
+    ].filter(Boolean).join(' ');
 
     return (
         <header className={s.Header} id="Header" style={{ transform: headerHidden ? 'translateY(-100%)' : 'translateY(0)' }}>
-            <Link className={s.logo} href='/' onClick={() => setHamburgerState(false)}>
+            <Link className={s.logo} href='/' onClick={() => {
+                if (hamburgerState) setHasInteracted(true);
+                setHamburgerState(false);
+            }}>
                 <LogoDraw 
                     active={!headerHidden}
                     strokeWidth={20}
@@ -171,11 +85,11 @@ function Header({ setSidebarOpen, sidebarOpen } : Props) {
                 />
             </Link>
 
-            <button className={`${s.Hamburger} ${s.btn} btn`} onClick={toggleHamburger} ref={hamburger}>
-                <div className={s.TopBar}    ref={topBar}   ></div>
-                <div className={s.MidBar1}   ref={midBar1}  ></div>
-                <div className={s.MidBar2}   ref={midBar2}  ></div>
-                <div className={s.BottomBar} ref={bottomBar}></div>
+            <button className={hamburgerClassName} onClick={toggleHamburger}>
+                <div className={s.TopBar}></div>
+                <div className={s.MidBar1}></div>
+                <div className={s.MidBar2}></div>
+                <div className={s.BottomBar}></div>
             </button>
         </header>
     );

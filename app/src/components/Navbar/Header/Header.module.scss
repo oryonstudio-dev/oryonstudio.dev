@@ -1,100 +1,246 @@
 @use '../../../utils/variables' as *;
 
+$hamburger-size: 2.5rem;
+$hamburger-thickness: 0.3rem;
+
 .Header {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 1.5rem;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    background: #000b;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px);
-    z-index: 1000;
-    transition: transform 0.5s ease-out;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background: #000b;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  transition: transform 0.5s ease-out;
 
-    .logo {
-        height: 6rem;
-        width: auto;
-        display: inline-block;
+  .logo {
+    height: 6rem;
+    width: auto;
+    display: inline-block;
+  }
+
+  .Hamburger {
+    width: $hamburger-size;
+    height: $hamburger-size;
+    position: relative;
+    padding: 0;
+    margin: 0 1rem 0 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    *[class*="Bar"] {
+      background-color: $cobaltBlue;
     }
 
-    .Hamburger {
-        $size: 2.5rem;
-        $thickness: 0.3rem;
-        width: $size;
-        height: $size;
-        position: relative;
-        padding: 0;
-        margin: 0 1rem 0 0;
-        background: none;
-        border: none;
-        outline: none;
-        cursor: pointer;
-
-        *[class*="Bar"] {
-            background-color: $cobaltBlue;
-        }
-
-        .TopBar, .BottomBar {
-            width: $size;
-            height: $thickness;
-            background: $electricBlue;
-            position: absolute;
-            border-radius: calc($thickness / 3);
-            transform-origin: 0 50%;
-        }
-
-        .TopBar {
-            top: 0;
-            left: 0;
-        }
-
-        .BottomBar {
-            left: 0;
-            bottom: 0;
-        }
-
-        *[class*='MidBar'] {
-            width: 50%;
-            height: $thickness;
-            position: absolute;
-            top: calc(50% - $thickness / 2);
-        }
-
-        .MidBar1 {
-            left: 0;
-            border-radius: calc($thickness / 3) 0 0 calc($thickness / 3);
-            transform-origin: 0 50%;
-        }
-
-        .MidBar2 {
-            right: 0;
-            border-radius: 0 calc($thickness / 3) calc($thickness / 3) 0;
-            transform-origin: 100% 50%;
-        }
-
-        @supports (corner-shape: bevel) {
-            .TopBar, .BottomBar {
-                corner-shape: bevel;
-                border-radius: calc($thickness / 2) 0;
-            }
-
-            *[class*='MidBar'] {
-                corner-shape: bevel;
-            }
-
-            .MidBar1 {
-                border-radius: calc($thickness / 2) 0 0 0;
-            }
-
-            .MidBar2 {
-                border-radius: 0 0 calc($thickness / 2) 0;
-            }
-        }
+    .TopBar, .BottomBar {
+      width: $hamburger-size;
+      height: $hamburger-thickness;
+      background: $electricBlue;
+      position: absolute;
+      border-radius: calc($hamburger-thickness / 3);
+      transform-origin: 0 50%;
     }
+
+    .TopBar {
+      top: 0;
+      left: 0;
+    }
+
+    .BottomBar {
+      left: 0;
+      bottom: 0;
+    }
+
+    *[class*='MidBar'] {
+      width: 50%;
+      height: $hamburger-thickness;
+      position: absolute;
+      top: calc(50% - $hamburger-thickness / 2);
+    }
+
+    .MidBar1 {
+      left: 0;
+      border-radius: calc($hamburger-thickness / 3) 0 0 calc($hamburger-thickness / 3);
+      transform-origin: 0 50%;
+    }
+
+    .MidBar2 {
+      right: 0;
+      border-radius: 0 calc($hamburger-thickness / 3) calc($hamburger-thickness / 3) 0;
+      transform-origin: 100% 50%;
+    }
+
+    @supports (corner-shape: bevel) {
+      .TopBar, .BottomBar {
+        corner-shape: bevel;
+        border-radius: calc($hamburger-thickness / 2) 0;
+      }
+
+      *[class*='MidBar'] {
+        corner-shape: bevel;
+      }
+
+      .MidBar1 {
+        border-radius: calc($hamburger-thickness / 2) 0 0 0;
+      }
+
+      .MidBar2 {
+        border-radius: 0 0 calc($hamburger-thickness / 2) 0;
+      }
+    }
+
+    &.active {
+      animation: rotateOpen 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+      .TopBar {
+        animation: topBarOpen 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+
+      .BottomBar {
+        animation: bottomBarOpen 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+
+      .MidBar1 {
+        animation: midBar1Open 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+
+      .MidBar2 {
+        animation: midBar2Open 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+    }
+
+    &.inactive {
+      animation: rotateClose 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+      .TopBar {
+        animation: topBarClose 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+
+      .BottomBar {
+        animation: bottomBarClose 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+
+      .MidBar1 {
+        animation: midBar1Close 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+
+      .MidBar2 {
+        animation: midBar2Close 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+    }
+  }
+}
+
+
+// H A M B U R G E R   A N I M A T I O N S   K E Y F R A M E S
+
+// Rotate
+@keyframes rotateOpen {
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(-630deg); }
+}
+
+@keyframes rotateClose {
+  0% { transform: rotateZ(-630deg); }
+  100% { transform: rotateZ(0deg); }
+}
+
+// Top Bar
+@keyframes topBarOpen {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(calc($hamburger-thickness * 1.2), calc($hamburger-thickness / 2 * 1.2)) rotate(45deg);
+  }
+}
+
+@keyframes topBarClose {
+  0% {
+    transform: translate(calc($hamburger-thickness * 1.2), calc($hamburger-thickness / 2 * 1.2)) rotate(45deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+// Bottom Bar
+@keyframes bottomBarOpen {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(calc($hamburger-thickness * 1.2), calc(-1 * $hamburger-thickness / 2 * 1.2)) rotate(-45deg);
+  }
+}
+
+@keyframes bottomBarClose {
+  0% {
+    transform: translate(calc($hamburger-thickness * 1.2), calc(-1 * $hamburger-thickness / 2 * 1.2)) rotate(-45deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+// Mid Bars
+@keyframes midBar1Open {
+  0% {
+    transform: translate(0, 0);
+    width: 50%;
+    height: $hamburger-thickness;
+  }
+  100% {
+    transform: translate(-100%, 50%);
+    width: 30%;
+    height: calc($hamburger-thickness / 2);
+  }
+}
+
+@keyframes midBar1Close {
+  0% {
+    transform: translate(-100%, 50%);
+    width: 30%;
+    height: calc($hamburger-thickness / 2);
+  }
+  100% {
+    transform: translate(0, 0);
+    width: 50%;
+    height: $hamburger-thickness;
+  }
+}
+
+@keyframes midBar2Open {
+  0% {
+    transform: translate(0, 0);
+    width: 50%;
+    height: $hamburger-thickness;
+  }
+  100% {
+    transform: translate(100%, 50%);
+    width: 30%;
+    height: calc($hamburger-thickness / 2);
+  }
+}
+
+@keyframes midBar2Close {
+  0% {
+    transform: translate(100%, 50%);
+    width: 30%;
+    height: calc($hamburger-thickness / 2);
+  }
+  100% {
+    transform: translate(0, 0);
+    width: 50%;
+    height: $hamburger-thickness;
+  }
 }
