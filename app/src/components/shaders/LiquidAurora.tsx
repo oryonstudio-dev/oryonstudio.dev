@@ -3,8 +3,8 @@
 import ShaderWrapper from './ShaderWrapper';
 
 import dynamic from 'next/dynamic';
-const Aurora     = dynamic(() => import('shaders/react').then(mod => mod.Aurora));
-const ChromaFlow = dynamic(() => import('shaders/react').then(mod => mod.ChromaFlow));
+const Aurora     = dynamic(() => import('shaders/react').then(mod => mod.Aurora),     { ssr: false });
+const ChromaFlow = dynamic(() => import('shaders/react').then(mod => mod.ChromaFlow), { ssr: false });
 
 function LiquidAurora() {
     return (

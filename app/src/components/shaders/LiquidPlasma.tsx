@@ -3,8 +3,8 @@
 import ShaderWrapper from './ShaderWrapper';
 
 import dynamic from 'next/dynamic';
-const Plasma  = dynamic(() => import('shaders/react').then(mod => mod.Plasma));
-const Liquify = dynamic(() => import('shaders/react').then(mod => mod.Liquify));
+const Plasma  = dynamic(() => import('shaders/react').then(mod => mod.Plasma),  { ssr: false });
+const Liquify = dynamic(() => import('shaders/react').then(mod => mod.Liquify), { ssr: false });
 
 function LiquidGradient() {
     return (

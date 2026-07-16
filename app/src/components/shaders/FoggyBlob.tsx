@@ -3,8 +3,8 @@
 import ShaderWrapper from './ShaderWrapper';
 
 import dynamic from 'next/dynamic';
-const Blob = dynamic(() => import('shaders/react').then(mod => mod.Blob));
-const Fog  = dynamic(() => import('shaders/react').then(mod => mod.Fog));
+const Blob = dynamic(() => import('shaders/react').then(mod => mod.Blob), { ssr: false });
+const Fog  = dynamic(() => import('shaders/react').then(mod => mod.Fog),  { ssr: false });
 
 function FoggyBlob() {
     return (
