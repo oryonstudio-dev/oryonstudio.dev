@@ -20,11 +20,6 @@ const ROWS = 4;
 const EASES = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
 
 function TransitionProvider({ children }: Children) {
-    // const gridRef:    DivRef   = useRef<Div>(null);
-    // const blocksRefs: DivRef[] = useMemo(() => Array.from({ length: ROWS }, () => useRef<Div>(null)), [ROWS]);
-    // const headingRef: HRef     = useRef<H>(null);
-    // const wordsRefs:  AnyRef[] = useMemo(() => Array.from({ length: ROWS }, () => useRef<Any>(null)), []);
-
     const gridRef    = useRef <Div> (null);
     const headingRef = useRef <H>   (null);
     const blocksRef  = useRef <Div[]> ([]);
