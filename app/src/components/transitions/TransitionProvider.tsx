@@ -89,7 +89,10 @@ function TransitionProvider({ children }: Children) {
             tl.to(words, {
                 y: '100%',
                 duration: 0.5,
-                stagger: 0.1,
+                stagger: {
+                    each: 0.1,
+                    from: 'end'
+                },
                 ease: 'power1.out'
             });
 
