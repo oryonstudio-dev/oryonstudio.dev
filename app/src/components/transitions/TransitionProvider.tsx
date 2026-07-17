@@ -1,6 +1,6 @@
 'use client';
 
-import { Children, Div, H, Any } from '@/utils/types';
+import { Children, El } from '@/utils/types';
 import { useRef, useState } from 'react';
 import styles from './TransitionProvider.module.scss';
 import { gsap } from 'gsap';
@@ -19,10 +19,10 @@ const ROWS = 4;
 const EASES = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
 
 function TransitionProvider({ children }: Children) {
-    const gridRef    = useRef <Div> (null);
-    const headingRef = useRef <H>   (null);
-    const blocksRef  = useRef <Div[]> ([]);
-    const wordsRef   = useRef <Any[]> ([]);
+    const gridRef    = useRef <El.Div> (null);
+    const headingRef = useRef <El.H>   (null);
+    const blocksRef  = useRef <El.Div[]> ([]);
+    const wordsRef   = useRef <El[]>     ([]);
     
     const [orionActive, setOrionActive] = useState<boolean>(false);
 

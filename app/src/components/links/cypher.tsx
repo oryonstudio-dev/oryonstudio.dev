@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation';
 import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useRef, useMemo } from 'react';
-import { Any, AnyRef } from '@/utils/types';
+import { Ref, El } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -18,7 +18,7 @@ interface Props extends LinkProps {
 }
 
 function CypherLink({ href, className, onClick, label = 'label', active, ref } : Props) {
-    const textRef: AnyRef = useRef<Any>(null);
+    const textRef: Ref = useRef<El>(null);
 
     const { contextSafe } = useGSAP();
 

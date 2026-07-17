@@ -1,11 +1,11 @@
 import styles from './Slide.module.scss';
-import { Children, AnyRef } from '@/utils/types';
+import { Children, Ref } from '@/utils/types';
 
 const s = styles;
 
 interface Props extends Children {
     className?: string;
-    ref?: AnyRef;
+    ref?: Ref;
     id?: string;
 }
 
