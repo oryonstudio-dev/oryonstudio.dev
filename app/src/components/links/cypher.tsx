@@ -47,7 +47,7 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
         gsap.to(textRef.current, {
             duration: 0.5,
             scrambleText: {
-                text: activeText,
+                text: initialText,
                 chars: "oryonstudio"
             }
         });
