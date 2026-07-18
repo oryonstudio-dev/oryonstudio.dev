@@ -57,18 +57,19 @@ export function useDeviceSpecs(): DeviceSpecs {
 
 
 // I N T E R S E C T I O N   O B S E R V E R
-export function useIsFullyVisible<T extends HTMLElement = HTMLElement>(options?: IntersectionObserverInit): [React.RefObject<T | null>, boolean] {
-    const [isFullyVisible, setIsFullyVisible] = useState(false);
+export function useIsVisible<T extends HTMLElement = HTMLElement>(ratio?: number, options?: IntersectionObserverInit): [React.RefObject<T | null>, boolean] {
+    const [isVisible, setIsVisible] = useState(false);
     const elRef = useRef<T | null>(null);
+    if (!ratio) ratio = 1.0;
 
     useEffect(() => {
         if (!elRef.current) return;
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setIsFullyVisible(entry.isIntersecting && entry.intersectionRatio === 1);
+                setIsVisible(entry.isIntersecting && entry.intersectionRatio >= ratio);
             }, {
-                threshold: 1.0,
+                threshold: ratio,
                 ...options
             }
         );
@@ -78,7 +79,8 @@ export function useIsFullyVisible<T extends HTMLElement = HTMLElement>(options?:
         return () => {
             if (elRef.current) observer.unobserve(elRef.current);
         }
-    }, [options]);
+    }, [ratio, options]);
 
-    return [elRef, isFullyVisible];
+    return [elRef, isVisible];
 }
+
