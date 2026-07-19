@@ -39,6 +39,35 @@ export const linksColumnSlide: {
     }
 }
 
+export const skewIn: GSAPAnimation<Ref> = (el, options) => {
+    const target = filterNulls(el);
+
+    const tween = gsap.from(target, {
+        skewX: 30,
+        x: -100,
+        opacity: 0,
+        ease: 'power3.out',
+        stagger: 0.1,
+        duration: 1,
+        ...options
+    });
+
+    return tween;
+}
+
+export const revealWipe: GSAPAnimation<Ref<El.Text>> = (text, options) => {
+    const target = filterNulls(text);
+    const splitText = SplitText.create(target, { type: 'chars' });
+
+    return gsap.from(splitText.chars, {
+        clipPath: 'inset(0 100% 0 0)',
+        duration: 1.2,
+        ease: 'power3.inOut',
+        ...options
+    });
+}
+
+// S P L I T   T E X T   A N I M A T I O N S
 export const charsSlideIn: GSAPAnimation.SplitText = {
     prepare: (text) => {
         const target = filterNulls(text);
@@ -72,36 +101,43 @@ export const charsSlideIn: GSAPAnimation.SplitText = {
     }
 }
 
-export const skewIn: GSAPAnimation<Ref> = (el, options) => {
-    const target = filterNulls(el);
+export const magneticPull: GSAPAnimation.SplitText = {
+    prepare: (text) => {
+        const target = filterNulls(text);
 
-    const tween = gsap.from(target, {
-        skewX: 30,
-        x: -100,
-        opacity: 0,
-        ease: 'power3.out',
-        stagger: 0.1,
-        duration: 1,
-        ...options
-    });
+        const splitText = SplitText.create(target, { type: "chars" });
 
-    return tween;
-}
+        gsap.set(splitText.chars, { 
+            x: () => gsap.utils.random(-200, 200),
+            y: () => gsap.utils.random(-200, 200),
+            opacity: 0,
+            rotation: () => gsap.utils.random(-90, 90)
+        });
 
-export const magneticPull: GSAPAnimation<Ref<El.Text>> = (text, options) => {
-    const targets = filterNulls(text);
-    const splitText = SplitText.create(targets, { type: 'chars' });
+        return splitText;
+    },
+    animate: (text, options) => {
 
-    return gsap.from(splitText.chars, {
-        x: () => gsap.utils.random(-200, 200),
-        y: () => gsap.utils.random(-200, 200),
-        opacity: 0,
-        rotation: () => gsap.utils.random(-90, 90),
-        stagger: 0.02,
-        duration: 1,
-        ease: 'power3.out',
-        ...options
-    });
+        const tl = gsap.timeline();
+
+        tl.fromTo(text.chars, {
+            x: () => gsap.utils.random(-50, 50),
+            y: () => gsap.utils.random(-50, 50),
+            opacity: 0,
+            rotation: () => gsap.utils.random(-90, 90)
+        }, {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            stagger: 0.02,
+            duration: 1,
+            ease: 'power3.out',
+            ...options
+        });
+
+        return tl;
+    }
 }
 
 export const spiralIn: GSAPAnimation<Ref<El.Text>> = (text, options) => {
@@ -117,18 +153,6 @@ export const spiralIn: GSAPAnimation<Ref<El.Text>> = (text, options) => {
         stagger: 0.04,
         duration: 0.8,
         ease: 'power3.out',
-        ...options
-    });
-}
-
-export const revealWipe: GSAPAnimation<Ref<El.Text>> = (text, options) => {
-    const target = filterNulls(text);
-    const splitText = SplitText.create(target, { type: 'chars' });
-
-    return gsap.from(splitText.chars, {
-        clipPath: 'inset(0 100% 0 0)',
-        duration: 1.2,
-        ease: 'power3.inOut',
         ...options
     });
 }

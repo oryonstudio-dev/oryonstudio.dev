@@ -38,7 +38,7 @@ function Footer() {
         if (typeof window == 'undefined') return;
         if (!slogan.current || !availability.current) return;
 
-        const splitSlogan = charsSlideIn.prepare(slogan);
+        const splitSlogan = magneticPull.prepare(slogan);
         const splitAvailability = charsSlideIn.prepare(availability);
 
         const tl = gsap.timeline({
@@ -49,7 +49,7 @@ function Footer() {
             delay: 0.1
         });
 
-        tl.add(charsSlideIn.animate(splitSlogan));
+        tl.add(magneticPull.animate(splitSlogan));
         tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
     });
 
