@@ -19,7 +19,7 @@ interface Props {
 }
 
 function Sidebar({ open, setSidebarOpen } : Props) {
-    const sidebar: Ref.Div = useRef<El.Div>(null);
+    const sidebar: Ref<El.Div | null> = useRef<El.Div>(null);
     const pathname = usePathname();
 
     useGSAP(() => {
