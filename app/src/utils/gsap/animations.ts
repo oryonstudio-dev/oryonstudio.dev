@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import { filterNulls } from '@/utils/functions';
 import { SplitText } from 'gsap/all';
-import type { Ref, GSAPAnimation } from '@/utils/types';
+import type { El, Ref, GSAPAnimation } from '@/utils/types';
 
 gsap.registerPlugin(SplitText);
 
@@ -39,28 +39,39 @@ export const linksColumnSlide: {
     }
 }
 
-export const splitTextSlideIn: GSAPAnimation<Ref.Text> = (text, options) => {
-    const target = filterNulls(text);
+export const charsSlideIn: GSAPAnimation.SplitText = {
+    prepare: (text) => {
+        const target = filterNulls(text);
 
-    const splitText = SplitText.create(target, { type: "chars" });
+        const splitText = SplitText.create(target, { type: "chars" });
 
-    const tl = gsap.timeline();
+        const tl = gsap.timeline();
 
-    tl.set(splitText.chars, { y: '100% '});
+        gsap.set(target, { overflow: 'hidden' });
+        gsap.set(splitText.chars, { y: '100%' });
 
-    tl.fromTo(splitText.chars, {
-        y: '100%'
-    }, {
-        y: 0,
-        duration: 0.6,
-        ease: 'back.out(2)',
-        stagger: {
-            each: 0.03,
-        },
-        ...options
-    });
+        return [tl, splitText];
+    },
+    animate: (text, options) => {
 
-    return tl;
+        const tl = gsap.timeline();
+
+        tl.set(text.chars, { y: '100%' });
+
+        tl.fromTo(text.chars, {
+            y: '100%'
+        }, {
+            y: 0,
+            duration: 0.6,
+            ease: 'back.out(2)',
+            stagger: {
+                each: 0.03,
+            },
+            ...options
+        });
+
+        return tl;
+    }
 }
 
 export const skewIn: GSAPAnimation<Ref> = (el, options) => {
@@ -79,7 +90,7 @@ export const skewIn: GSAPAnimation<Ref> = (el, options) => {
     return tween;
 }
 
-export const magneticPull: GSAPAnimation<Ref.Text> = (text, options) => {
+export const magneticPull: GSAPAnimation<Ref<El.Text>> = (text, options) => {
     const targets = filterNulls(text);
     const splitText = SplitText.create(targets, { type: 'chars' });
 
@@ -95,7 +106,7 @@ export const magneticPull: GSAPAnimation<Ref.Text> = (text, options) => {
     });
 }
 
-export const spiralIn: GSAPAnimation<Ref.Text> = (text, options) => {
+export const spiralIn: GSAPAnimation<Ref<El.Text>> = (text, options) => {
     const target = filterNulls(text);
     const splitText = SplitText.create(target, { type: 'chars' });
 
@@ -112,7 +123,7 @@ export const spiralIn: GSAPAnimation<Ref.Text> = (text, options) => {
     });
 }
 
-export const revealWipe: GSAPAnimation<Ref.Text> = (text, options) => {
+export const revealWipe: GSAPAnimation<Ref<El.Text>> = (text, options) => {
     const target = filterNulls(text);
     const splitText = SplitText.create(target, { type: 'chars' });
 
