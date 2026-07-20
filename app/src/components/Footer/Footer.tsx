@@ -52,9 +52,9 @@ function Footer() {
         });
 
         tl.add(magneticPull.animate(splitSlogan));
-        tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
-        tl.add(drawDivider(divider));
-        tl.add(revealWipe(linksRef, { stagger: 0.2 }));
+        tl.add(charsSlideIn.animate(splitAvailability), "<0.1");
+        tl.add(drawDivider(divider), '<0.5');
+        tl.add(revealWipe(linksRef, { stagger: 0.2 }), '<0.1');
     }, { scope: footer });
 
     return (
