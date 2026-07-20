@@ -20,12 +20,13 @@ const s = styles;
 
 function Footer() {
     const [footer, isFooterVisible] = useIsVisible(0.75);
-    const slogan = useRef<El.P>(null);
-    const availability = useRef<El.P>(null);
-    const divider = useRef<El.Div>(null);
-    const author = useRef<El.P>(null);
-    const copyright = useRef<El.P>(null);
-    
+
+    const slogan       = useRef<El.P>  (null);
+    const availability = useRef<El.P>  (null);
+    const divider      = useRef<El.Div>(null);
+    const author       = useRef<El.P>  (null);
+    const copyright    = useRef<El.P>  (null);
+
     const t = useTranslations('global');
 
     const links: LinkTemplate[] = [
