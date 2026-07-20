@@ -12,7 +12,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { El } from '@/utils/types';
-import { charsSlideIn, magneticPull } from '@/utils/gsap/animations';
+import { charsSlideIn, magneticPull, drawDivider } from '@/utils/gsap/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,6 +22,7 @@ function Footer() {
     const [footer, isFooterFullyVisible] = useIsVisible(0.75);
     const slogan = useRef<El.P>(null);
     const availability = useRef<El.P>(null);
+    const divider = useRef<El.Div>(null);
     const linksRef = useRef(new Map());
     
     const t = useTranslations('global');
@@ -51,6 +52,7 @@ function Footer() {
 
         tl.add(magneticPull.animate(splitSlogan));
         tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
+        tl.add(drawDivider(divider));
     });
 
     return (
@@ -69,7 +71,7 @@ function Footer() {
                     <p className={s.availability}><span className={s.indicator}></span><span className={s.text} ref={availability} dangerouslySetInnerHTML={{ __html: t('availability') }}></span></p>
                 </div>
 
-                <div className={s.divider} />
+                <div className={s.divider} ref={divider} />
 
                 <nav>
                     { links.map(link => (

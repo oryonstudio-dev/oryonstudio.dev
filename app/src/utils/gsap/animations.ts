@@ -1,9 +1,9 @@
-import { gsap } from 'gsap';
+import { gsap, CSSPlugin } from 'gsap';
 import { filterNulls } from '@/utils/functions';
 import { SplitText } from 'gsap/all';
 import type { El, Ref, GSAPAnimation } from '@/utils/types';
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText, CSSPlugin);
 
 export const linksColumnSlide: {
     in:  GSAPAnimation;
@@ -192,5 +192,14 @@ export const fadeUpWords: GSAPAnimation = (text, options) => {
         duration: 0.8,
         ease: 'power2.out',
         ...options
+    });
+}
+
+// D I V I D E R   A N I M A T I O N
+export const drawDivider: GSAPAnimation = (target, options) => {
+    const divider = filterNulls(target);
+
+    return gsap.from(divider, {
+        height: 0
     });
 }
