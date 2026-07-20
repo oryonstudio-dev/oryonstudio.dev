@@ -8,7 +8,7 @@
             "services": "our_services"
         },
         "footer": {
-            "humanTouch": {
+            "author": {
                 "designed_and_engineered_by": "Designed and engineered in Poland by",
                 "jakub_barczynski": "Jakub Barczyński",
                 "powered_by_nextjs": "Powered by Next.js."

@@ -1,50 +1,52 @@
 'use client';
 
-import { motion } from 'motion/react';
-import { useRef, useEffect } from 'react';
+import { motion, Variants } from 'motion/react';
 
 interface Props {
-    active:       boolean,
-    color?:       string,
-    strokeWidth?: number,
-    fill?:        string
+    active:       boolean;
+    color?:       string;
+    strokeWidth?: number;
+    fill?:        string;
+    duration?:    number;
+    delay?:       number;
 }
 
-function LogoDraw({ active, color = '#00f', strokeWidth = 10, fill = color }: Props) {
-    const isInitialRef = useRef(true);
-
-    const drawAnimation = {
+function LogoDraw({ active, color = '#00ff', strokeWidth = 10, fill = color, duration = 2, delay = 0 }: Props) {
+    const drawAnimation: Variants = {
         hidden: {
             pathLength: 0,
             fill: '#00f0',
             opacity: 0
         },
-        visible: ({ isInitial }: { isInitial: boolean }) => ({
+        visible: ({ duration, delay, fill }: { duration: number, delay: number, fill: string }) => ({
             pathLength: 1,
             fill: fill,
             opacity: 1,
             transition: {
                 pathLength: {
-                    duration: 2,
-                    delay: isInitial ? 1 : 0
+                    duration: duration,
+                    delay: delay,
+                    ease: 'linear'
                 },
                 fill: {
-                    duration: 1,
-                    delay: isInitial ? 2 : 1
+                    duration: duration / 3,
+                    delay: duration + delay - duration / 3,
+                    ease: 'easeOut'
                 },
                 opacity: {
-                    duration: 0.5,
-                    delay: isInitial ? 0.4 : 0
+                    duration: duration * 0.1,
+                    delay: delay,
+                    ease: 'easeOut'
                 }
             }
         })
     }
 
-    useEffect(() => {
-        isInitialRef.current = false;
-    }, []);
-
-    const customData = { isInitial: isInitialRef.current };
+    const customData = { 
+        duration: duration,
+        delay: delay,
+        fill: fill
+    };
 
     return (
         <svg
@@ -65,7 +67,6 @@ function LogoDraw({ active, color = '#00f', strokeWidth = 10, fill = color }: Pr
                     custom={customData}
                     initial="hidden"
                     animate={active ? 'visible' : 'hidden'}
-                    fill="none"
                 />
 
                 <motion.path
@@ -79,7 +80,6 @@ function LogoDraw({ active, color = '#00f', strokeWidth = 10, fill = color }: Pr
                     custom={customData}
                     initial="hidden"
                     animate={active ? 'visible' : 'hidden'}
-                    fill="none"
                 />
 
                 <motion.path
@@ -93,7 +93,6 @@ function LogoDraw({ active, color = '#00f', strokeWidth = 10, fill = color }: Pr
                     custom={customData}
                     initial="hidden"
                     animate={active ? 'visible' : 'hidden'}
-                    fill="none"
                 />
             </g>
         </svg>

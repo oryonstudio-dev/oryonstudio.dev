@@ -8,7 +8,7 @@
             "services": "usługi"
         },
         "footer": {
-            "humanTouch": {
+            "author": {
                 "designed_and_engineered_by": "Strona zaprojektowana i wykonana w Polsce przez",
                 "jakub_barczynski": "Jakuba Barczyńskiego",
                 "powered_by_nextjs": "Napędzana przez Next.js."

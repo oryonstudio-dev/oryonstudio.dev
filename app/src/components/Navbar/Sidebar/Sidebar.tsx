@@ -6,10 +6,9 @@ import { useRef, useMemo } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { Div, DivRef } from '@/utils/types';
+import { El, Ref } from '@/utils/types';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { A } from '@/utils/types';
 import { linksColumnSlide } from '@/utils/gsap/animations';
 
 const s = styles;
@@ -20,7 +19,7 @@ interface Props {
 }
 
 function Sidebar({ open, setSidebarOpen } : Props) {
-    const sidebar: DivRef = useRef<Div>(null);
+    const sidebar: Ref<El.Div | null> = useRef<El.Div>(null);
     const pathname = usePathname();
 
     useGSAP(() => {
@@ -51,7 +50,7 @@ function Sidebar({ open, setSidebarOpen } : Props) {
         { href: '/contact',    label: t('contact')    }
     ], [t]);
 
-    const linksRefs = Array.from({ length: links.length }, () => useRef<A>(null))
+    const linksRefs = Array.from({ length: links.length }, () => useRef<El.A>(null))
 
     useGSAP(() => {
         if (open) linksColumnSlide. in(linksRefs);

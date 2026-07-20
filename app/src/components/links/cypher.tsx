@@ -8,6 +8,7 @@ import { useRef, useMemo } from 'react';
 import { Ref, El } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { forwardRef } from 'react';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
@@ -17,7 +18,7 @@ interface Props extends LinkProps {
     onClick?: () => void;
 }
 
-function CypherLink({ href, className, onClick, label = 'label', active, ref } : Props) {
+const CypherLink = forwardRef<HTMLAnchorElement, Props>(({ href, className, onClick, label = 'label', active }, ref) => {
     const textRef: Ref = useRef<El>(null);
 
     const { contextSafe } = useGSAP();
@@ -67,6 +68,7 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
             </span>
         </Link>
     );
-}
+});
 
+CypherLink.displayName = 'CypherLink';
 export default CypherLink;

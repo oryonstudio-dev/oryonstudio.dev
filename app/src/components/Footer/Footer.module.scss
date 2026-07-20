@@ -22,7 +22,8 @@
             justify-content: center;
             width: calc(50% - 1px - $columnPadding * 2);
             padding: 1rem $columnPadding;
-            align-items: start;
+            align-items: center;
+            box-sizing: border-box;
         }
 
         .info {
@@ -41,6 +42,8 @@
                 margin: 0;
                 font-family: $raleway;
                 margin-top: 2rem;
+                display: flex;
+                align-items: center;
 
                 .indicator {
                     width: 0.6rem;
@@ -50,12 +53,18 @@
                     display: inline-block;
                     margin: auto 0.3rem;
                 }
+
+                .text {
+                    overflow: hidden;
+                    display: block;
+                }
             }
         }
 
+
         .divider {
+            height: 11rem;
             width: 2px;
-            height: 15rem;
             background: white;
             margin-block: auto;
         }
@@ -65,7 +74,7 @@
             gap: 0.5rem;
 
             .link {
-                width: 100%;
+                margin-inline: auto;
             }
         }
 
@@ -74,12 +83,17 @@
             align-items: center;
             justify-content: center;
 
-            .info {
+            .info, nav {
                 text-align: center;
+                width: 100%;
             }
 
             .divider {
                 display: none;
+            }
+
+            nav .link {
+                text-align: center;
             }
         }
     }
@@ -90,12 +104,12 @@
         width: 100%;
         align-items: center;
 
-        .humanTouch, .copyright {
+        .author, .copyright {
             width: 100%;
             text-align: center;
         }
 
-        .humanTouch {
+        .author {
             margin: 0 0 0.5rem 0;
             font-family: $raleway;
         }
