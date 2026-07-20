@@ -200,6 +200,8 @@ export const drawDivider: GSAPAnimation = (target, options) => {
     const divider = filterNulls(target);
 
     return gsap.from(divider, {
-        height: 0
+        height: 0,
+        duration: 0.5,
+        ease: 'power2.out'
     });
 }
