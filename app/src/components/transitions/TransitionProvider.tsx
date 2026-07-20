@@ -21,8 +21,8 @@ const EASES = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
 function TransitionProvider({ children }: Children) {
     const gridRef    = useRef <El.Div> (null);
     const headingRef = useRef <El.H>   (null);
-    const blocksRef  = useRef <El.Div[]> ([]);
-    const wordsRef   = useRef <El[]>     ([]);
+    const blocksRef  = useRef <(El.Div | null)[]> ([]);
+    const wordsRef   = useRef <(El     | null)[]> ([]);
     
     const [orionActive, setOrionActive] = useState<boolean>(false);
 
