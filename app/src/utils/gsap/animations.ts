@@ -328,7 +328,7 @@ export const fadeUpWords: GSAPAnimation.SplitText = {
 
         const splitText = SplitText.create(target, { type: "words" });
 
-        gsap.set(splitText.chars, { 
+        gsap.set(splitText.words, { 
             y: 40,
             opacity: 0,
             ...options
