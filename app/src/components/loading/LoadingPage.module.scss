@@ -16,7 +16,14 @@
     flex: 1;
     width: 100%;
     background-color: #222;
-    transform: scaleX(1);
+    transform-origin: right center;
+    animation: wipeOut 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+    @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{0.5 + ($i - 1) * 0.08}s;
+        }
+    }
 }
 
 .branding {
@@ -29,25 +36,48 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
     color: white;
 
     h1 {
         font-family: $raleway;
         overflow: hidden;
-        pointer-events: none;
 
         .oryon, .studio {
             display: inline-block;
-            transform: translateY(100%);
-        }
-
-        .oryon {
-            font-weight: 400;
+            transform: translateY(0);
+            animation: slideDown 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .studio {
             font-weight: 200;
+            animation-delay: 0s;
         }
+
+        .oryon {
+            font-weight: 400;
+            animation-delay: 0.1s;
+        }
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes wipeOut {
+    0% {
+        transform: scaleX(1);
+    }
+    99% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(0);
+        visibility: hidden;
     }
 }
