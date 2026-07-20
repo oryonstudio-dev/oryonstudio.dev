@@ -12,18 +12,17 @@ import { gsap } from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { El } from '@/utils/types';
-import { charsSlideIn, magneticPull, drawDivider } from '@/utils/gsap/animations';
+import { charsSlideIn, magneticPull, drawDivider, revealWipe } from '@/utils/gsap/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const s = styles;
 
 function Footer() {
-    const [footer, isFooterFullyVisible] = useIsVisible(0.75);
+    const [footer, isFooterVisible] = useIsVisible(0.75);
     const slogan = useRef<El.P>(null);
     const availability = useRef<El.P>(null);
     const divider = useRef<El.Div>(null);
-    const linksRef = useRef(new Map());
     
     const t = useTranslations('global');
 
@@ -35,9 +34,11 @@ function Footer() {
         { href: '/contact',    label: t('links.contact')    }
     ];
 
+    const linksRef = useRef<(El.A | null)[]>([]);
+
     useGSAP(() => {
         if (typeof window == 'undefined') return;
-        if (!footer.current || !slogan.current || !availability.current) return;
+        if (!footer.current || !slogan.current || !availability.current || !divider.current) return;
 
         const splitSlogan = magneticPull.prepare(slogan);
         const splitAvailability = charsSlideIn.prepare(availability);
@@ -53,7 +54,8 @@ function Footer() {
         tl.add(magneticPull.animate(splitSlogan));
         tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
         tl.add(drawDivider(divider));
-    });
+        tl.add(revealWipe(linksRef, { stagger: 0.2 }));
+    }, { scope: footer });
 
     return (
         <footer className={s.Footer} ref={footer}>
@@ -61,7 +63,7 @@ function Footer() {
                 <div className={s.info}>
                     <Link href="/" className={s.logo}>
                         <LogoDraw 
-                            active={isFooterFullyVisible}
+                            active={isFooterVisible}
                             color="#ffff"
                             duration={2}
                             delay={0.1}
@@ -74,19 +76,13 @@ function Footer() {
                 <div className={s.divider} ref={divider} />
 
                 <nav>
-                    { links.map(link => (
+                    { links.map((link, index) => (
                         <CypherLink 
                             className={s.link}
                             label={link.label}
                             href={link.href}
-                            key={links.indexOf(link)}
-                            ref={ (el) => {
-                                if (el) {
-                                    linksRef.current.set(links.indexOf(link), el);
-                                } else {
-                                    linksRef.current.delete(links.indexOf(link));
-                                }
-                            } }
+                            key={index}
+                            ref={el => { linksRef.current[index] = el }}
                         />
                     )) }
                 </nav>
