@@ -39,6 +39,21 @@ export const linksColumnSlide: {
     }
 }
 
+/**
+ * A reusable GSAP slide-in with skew animation.
+ * @param el element to be animated; can be anything of type `Elements`
+ * @param options optional, additional data for the animation; you can for instance add staggers, override duration, etc.
+ * @returns gsap.core.Tween
+ * @example you can use it as a separate animation:
+ * ```ts
+ * skewIn(elements, { stagger: 0.2 });
+ * ```
+ * or in a timeline with `.add()`:
+ * ```ts
+ * const tl = gsap.timeline();
+ * tl.add(skewIn(elements, { stagger: 0.2 }), '<0,5');
+ * ```
+ */
 export const skewIn: GSAPAnimation<El> = (el, options) => {
     const target = convertElements(el);
 
@@ -55,6 +70,22 @@ export const skewIn: GSAPAnimation<El> = (el, options) => {
     return tween;
 }
 
+/**
+ * A reusable GSAP clip path animation.
+ * Reveals the element from left to right
+ * @param el element to be animated; can be anything of type `Elements`
+ * @param options optional, additional data for the animation; you can for instance add staggers, override duration, etc.
+ * @returns gsap.core.Tween
+ * @example you can use it as a separate animation:
+ * ```ts
+ * revealWipe(elements, { stagger: 0.2 });
+ * ```
+ * or in a timeline with `.add()`:
+ * ```ts
+ * const tl = gsap.timeline();
+ * tl.add(revealWipe(elements, { stagger: 0.2 }), '<0,5');
+ * ```
+ */
 export const revealWipe: GSAPAnimation<El.Text> = (text, options) => {
     const target = convertElements(text);
 
@@ -67,18 +98,58 @@ export const revealWipe: GSAPAnimation<El.Text> = (text, options) => {
 }
 
 // S P L I T   T E X T   A N I M A T I O N S
-export const charsSlideIn: GSAPAnimation.SplitText = {
-    prepare: (text) => {
+export const charsSlideIn = {
+    /**
+     * Prepares the target element for the charsSlideIn animation by splitting the text and setting initial values.
+     * @param text - target element of type `El.Text`
+     * @returns SplitText instance
+     * @example
+     * ```ts
+        const spliText = charsSlideIn.prepare(text);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(charsSlideIn.animate(splitText), "<0.5");
+        * ```
+    */
+    prepare: (text, options?) => {
         const target = convertElements(text);
 
         const splitText = SplitText.create(target, { type: "chars" });
 
         gsap.set(target, { overflow: 'hidden' });
-        gsap.set(splitText.chars, { y: '100%' });
+        gsap.set(splitText.chars, { y: '100%', ...options });
 
         return splitText;
     },
-    animate: (text, options) => {
+
+    /**
+     * Reusable GSAP character-level slide-in upwards animation.
+     * Use after `.prepare()`
+     * @param text - target element returned by `.prepare()`
+     * @returns gsap.core.Timeline
+     * @example
+     * ```ts
+        const splitText = charsSlideIn.prepare(text);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(charsSlideIn.animate(splitText), "<0.5");
+     * ```
+    */
+    animate: (text, options?) => {
 
         const tl = gsap.timeline();
 
@@ -98,10 +169,31 @@ export const charsSlideIn: GSAPAnimation.SplitText = {
 
         return tl;
     }
-}
+} satisfies GSAPAnimation.SplitText;
 
-export const magneticPull: GSAPAnimation.SplitText = {
-    prepare: (text) => {
+export const magneticPull = {
+    /**
+     * Prepares the target element for the marneticPull animation by splitting the text and setting initial values.
+     * @param text - target element of type El.Text
+     * @returns SplitText instance
+     * @example
+     * ```ts
+     * const splitSlogan = magneticPull.prepare(slogan);
+        const splitAvailability = charsSlideIn.prepare(availability);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: footer.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(magneticPull.animate(splitSlogan));
+        tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
+        * ```
+    */
+    prepare: (text, options?) => {
         const target = convertElements(text);
 
         const splitText = SplitText.create(target, { type: "chars" });
@@ -110,12 +202,36 @@ export const magneticPull: GSAPAnimation.SplitText = {
             x: () => gsap.utils.random(-200, 200),
             y: () => gsap.utils.random(-200, 200),
             opacity: 0,
-            rotation: () => gsap.utils.random(-90, 90)
+            rotation: () => gsap.utils.random(-90, 90),
+            ...options
         });
 
         return splitText;
     },
-    animate: (text, options) => {
+
+    /**
+     * Reusable GSAP character-level magnetic pull animation.
+     * Use after `.prepare()`
+     * @param text - target element returned by `.prepare()`
+     * @returns `gsap.core.Timeline`
+     * @example
+     * ```ts
+     * const splitSlogan = magneticPull.prepare(slogan);
+        const splitAvailability = charsSlideIn.prepare(availability);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: footer.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(magneticPull.animate(splitSlogan));
+        tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
+     * ```
+    */
+    animate: (text, options?) => {
 
         const tl = gsap.timeline();
 
@@ -137,10 +253,29 @@ export const magneticPull: GSAPAnimation.SplitText = {
 
         return tl;
     }
-}
+} satisfies GSAPAnimation.SplitText;
 
 export const spiralIn: GSAPAnimation.SplitText = {
-    prepare: (text) => {
+    /**
+     * Prepares the target element for the spiralIn animation by splitting the text and setting initial values.
+     * @param text - target element of type El.Text
+     * @returns SplitText instance
+     * @example
+     * ```ts
+     * const splitText = spiralIn.prepare(text);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: footer.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(spiralIn.animate(splitText));
+        * ```
+    */
+    prepare: (text, options?) => {
         const target = convertElements(text);
 
         const splitText = SplitText.create(target, { type: "chars" });
@@ -149,12 +284,34 @@ export const spiralIn: GSAPAnimation.SplitText = {
             x: () => gsap.utils.random(-200, 200),
             y: () => gsap.utils.random(-200, 200),
             opacity: 0,
-            rotation: () => gsap.utils.random(-90, 90)
+            rotation: () => gsap.utils.random(-90, 90),
+            ...options
         });
 
         return splitText;
     },
-    animate: (text, options) => {
+
+    /**
+     * Reusable GSAP character-level spiral-in animation.
+     * Use after `.prepare()`
+     * @param text - target element returned by `.prepare()`
+     * @returns `gsap.core.Timeline`
+     * @example
+     * ```ts
+     * const splitText = spiralIn.prepare(text);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(magneticPull.animate(splitText));
+     * ```
+    */
+    animate: (text, options?) => {
 
         const tl = gsap.timeline();
 
@@ -178,7 +335,7 @@ export const spiralIn: GSAPAnimation.SplitText = {
 
         return tl;
     }
-}
+} satisfies GSAPAnimation.SplitText;
 
 export const fadeUpWords: GSAPAnimation = (text, options) => {
     const target = convertElements(text);
