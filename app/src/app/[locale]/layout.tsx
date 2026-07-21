@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.scss";
 import { Raleway, Poppins, Google_Sans_Code } from "next/font/google";
+import localFont from 'next/font/local';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from 'next-intl';
@@ -18,15 +19,14 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  variable: "--raleway",
+const generalSans = localFont({
+  src: '../../../public/fonts/GeneralSans-Variable.woff2',
+  variable: '--generalSans'
 });
 
-const poppins = Poppins({
-  subsets:  ["latin"],
-  variable: "--poppins",
-  weight:   ["100", "200", "300", "400", "500", "600", "700"]
+const nohemi = localFont({
+  src: '../../../public/fonts/Nohemi-VF.ttf',
+  variable: '--nohemi'
 });
 
 const googleCode = Google_Sans_Code({
@@ -48,7 +48,7 @@ async function RootLayout({ children, params }: { children: React.ReactNode; par
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className={`${raleway.variable} ${poppins.variable} ${googleCode.variable}`}>
+    <html lang={locale} className={`${googleCode.variable} ${generalSans.variable} ${nohemi.variable}`}>
       <body>
         <LoadingPage>
           <NextIntlClientProvider messages={messages}>

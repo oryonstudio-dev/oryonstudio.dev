@@ -11,8 +11,9 @@ root {
         padding: 0;
         margin: 0;
         background-color: #000;
-        font-family: $poppins, $raleway, Arial;
+        font-family: $generalSans, Arial;
         font-size: 16px;
+        color: white;
     }
 }
 
@@ -24,6 +25,7 @@ root {
 
 @layer main {
     html {
+        /* S C R O L L B A R */
         $trackColor: #333;
         $thumbColor: #22f;
         $thumbHoverColor: #55f;
@@ -50,5 +52,9 @@ root {
         &::-webkit-scrollbar-thumb:hover {
             background: $thumbHoverColor;
         }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: $nohemi;
     }
 }
