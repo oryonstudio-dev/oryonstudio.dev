@@ -10,6 +10,7 @@
 
     .content {
         padding-top: 150px;
+        margin-top: calc(5vw + 5vh);
 
         .availability {
             text-transform: uppercase;
@@ -32,7 +33,7 @@
 
         h1 {
             font-weight: 300;
-            font-size: 4.5rem;
+            font-size: 4rem;
             width: 70%;
 
             strong {
@@ -51,8 +52,51 @@
             }
         }
 
+        @media (max-width: 1008px) {
+            h1 {
+                width: 90%;
+            }
+
+            .lead {
+                width: 100%;
+            }
+        }
+
         .cta {
             margin-top: 1rem;
+        }
+
+        @media (max-width: 777px) {
+            .availability {
+                font-size: 1.1rem;
+            }
+
+            h1 {
+                width: 100%;
+                font-size: 3rem;
+            }
+
+            .lead {
+                font-size: 1.1rem;
+            }
+
+            .cta {
+                font-size: 1rem !important;
+                line-height: 1rem !important;
+            }
+        }
+
+        @media (max-width: 310px) {
+            .availability {
+                font-size: 0.9rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .lead {
+                font-size: 0.9rem;
+            }
         }
 
         .marquee {
@@ -60,7 +104,7 @@
             transform-origin: bottom left;
             position: absolute;
             left: 0;
-            bottom: -3rem;
+            bottom: -2rem;
         }
     }
 }
