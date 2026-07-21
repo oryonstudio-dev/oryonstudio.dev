@@ -1,15 +1,54 @@
 @use '../../utils/variables.scss' as *;
 
 .Hero {
-    @include flexAlign(center, center, center);
+    padding: 2rem;
 
-    h1 {
-        color: white;
-        font-family: $googleCode;
-        font-weight: 200;
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-        .pointer {
-            @include blink(1.5s);
+    .content {
+        padding-top: 150px;
+
+        .availability {
+            text-transform: uppercase;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 100;
+            margin-bottom: 1rem;
+
+            .indicator {
+                width: 1rem;
+                aspect-ratio: 1;
+                background: #0f0;
+                display: inline-block;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+            }
+        }
+
+        h1 {
+            font-weight: 300;
+            font-size: 4.5rem;
+            width: 70%;
+
+            strong {
+                font-weight: 500;
+            }
+        }
+
+        .lead {
+            font-size: 1.3rem;
+            width: 85%;
+            margin-top: 0.5rem;
+            font-weight: 400;
+            
+            strong {
+                font-weight: 600;
+            }
         }
     }
 }
