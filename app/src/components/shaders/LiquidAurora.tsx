@@ -1,7 +1,7 @@
 'use client';
 
 import ShaderWrapper from './ShaderWrapper';
-import placeholder from '/placeholders/shaders/liquid-aurora.png';
+import placeholder from '@/../public/placeholders/shaders/liquid-aurora.png';
 
 import dynamic from 'next/dynamic';
 const Aurora     = dynamic(() => import('shaders/react').then(mod => mod.Aurora),     { ssr: false });
