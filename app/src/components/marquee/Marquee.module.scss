@@ -44,3 +44,30 @@
         width: auto;
     }
 }
+
+.collabsMarquee {
+    position: relative;
+
+    .text {
+        display: grid;
+        font-size: 2rem;
+        position: absolute;
+        top: 0;
+        left: 50vw;
+        transform: translateY(-50%);
+        z-index: 2;
+        font-weight: 200;
+
+        & > * {
+            grid-area: 1 / 1;
+        }
+
+        .white {
+            clip-path: inset(0 0 50% 0);
+        }
+
+        .black {
+            color: black;
+        }
+    }
+}
