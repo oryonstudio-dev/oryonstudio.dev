@@ -33,6 +33,12 @@ function Contact() {
                             src={q1BgText}
                             alt="pages"
                         />
+                        
+                        <div className={s.blueRect} />
+
+                        <div className={s.modal}>
+                            <h2>How many pages do you need on your website?</h2>
+                        </div>
                     </div>
                 </HorizontalPanel>
 
@@ -43,6 +49,13 @@ function Contact() {
                             src={q2BgText}
                             alt="pages"
                         />
+
+                        <div className={`${s.blueRect} ${s.br1}`} />
+                        <div className={`${s.blueRect} ${s.br2}`} />
+
+                        <div className={s.modal}>
+                            <h2>What type of website are you looking for?</h2>
+                        </div>
                     </div>
                 </HorizontalPanel>
 
@@ -53,6 +66,13 @@ function Contact() {
                             src={q3BgText}
                             alt="pages"
                         />
+
+                        <div className={`${s.blueRect} ${s.br1}`} />
+                        <div className={`${s.blueRect} ${s.br2}`} />
+
+                        <div className={s.modal}>
+                            <h2>How creative do you want it to be?</h2>
+                        </div>
                     </div>
                 </HorizontalPanel>
 
@@ -63,6 +83,13 @@ function Contact() {
                             src={q4BgText}
                             alt="pages"
                         />
+
+                        <div className={`${s.blueRect} ${s.br1}`} />
+                        <div className={`${s.blueRect} ${s.br2}`} />
+
+                        <div className={s.modal}>
+                            <h2>Your information</h2>
+                        </div>
                     </div>
                 </HorizontalPanel>
             </HorizontalSection>
