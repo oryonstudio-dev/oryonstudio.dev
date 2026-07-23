@@ -11,7 +11,10 @@ function Contact() {
     return (
         <Slide className={s.Hero}>
             <FoggyBlob />
-            <h1>{ t('page under construction') } <span className={s.pointer}>█</span></h1>
+            <div className={s.content}>
+                <h1>Let's Build Something Out of This World</h1>
+                <p className={s.lead}>Fill out the form below or send a direct email. We respond to qualified inqueries within 24 hours.</p>
+            </div>
         </Slide>
     );
 }
