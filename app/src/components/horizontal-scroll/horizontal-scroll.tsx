@@ -11,11 +11,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 // S E C T I O N
 interface SectionProps extends Children {
-    slides:     number;
     className?: string;
 };
 
-export function HorizontalSection({ children, slides, className }: SectionProps) {
+export function HorizontalSection({ children, className }: SectionProps) {
     const sectionRef = useRef<El>(null);
     const wrapperRef = useRef<El.Div>(null);
 
