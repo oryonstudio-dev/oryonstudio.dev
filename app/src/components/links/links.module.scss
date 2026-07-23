@@ -41,25 +41,31 @@
     }
 }
 
-.shadowBtn {
+.flareBtn {
     $padding-block: 1.2rem;
     $padding-inline: 2rem;
     $font-size: 1.2rem;
     $height: calc(2 * $padding-block + $font-size);
+    --lightIntensity: 0.75;
+    --lightColor: #00f;
 
     padding: $padding-block $padding-inline;
     font-size: $font-size;
     line-height: $font-size;
     border-radius: calc($height / 2);
-    box-shadow: 
-        inset 0 0 0 calc($height / 2 * 1.1) $cobaltBlue;
+    box-shadow: inset 0 0 0 0.2rem $cobaltBlue;
     transition: box-shadow 0.3s ease-out;
     position: relative;
     overflow: visible;
     width: fit-content;
     background: #000d;
 
-    --lightOpacity: 0;
+    &.prior {
+        --lightIntensity: 1;
+        box-shadow: inset 0 0 0 calc($height / 2 * 1.1) $cobaltBlue !important;
+    }
+
+    --lightOpacity: 1;
 
     .link {
         color: white;
@@ -68,30 +74,31 @@
 
     @media (hover: hover) and (pointer: fine) {
         &:hover {
-            box-shadow: none;
-            --lightOpacity: 1;
+            box-shadow: none !important;
+            --lightOpacity: var(--lightIntensity);
+            --lightColor: #fff;
         }
     }
 
     @media (hover: none) and (pointer: coarse) {
-        box-shadow: none;
-        --lightOpacity: 1;
+        box-shadow: none !important;
+        --lightOpacity: var(--lightIntensity);
     }
-    
 
     .flare {
         width: 4rem;
-        opacity: var(--lightOpacity);
+        opacity: calc(var(--lightOpacity) * var(--lightIntensity));
         aspect-ratio: 1;
         border-radius: 50%;
-        background: #fff;
+        background: var(--lightColor);
         filter: blur(1.5rem);
-        transition: width 0.5s ease-out;
         position: absolute;
         offset-path: border-box;
         offset-anchor: center 30%;
         transition: 
-            opacity 0.5s ease-out;
+            opacity 0.5s ease-out,
+            background-color 0.5s ease-in-out,
+            width 0.5s ease-out;
         pointer-events: none;
         animation: followBorder 10s linear infinite;
         z-index: -1;
@@ -104,9 +111,9 @@
         z-index: -1;
         inset: calc($thickness * -1);
         animation: lightTravel 10s linear infinite;
-        background: linear-gradient(var(--lightAngle), #fff, #fff0);
+        background: linear-gradient(var(--lightAngle), var(--lightColor), #fff0);
         filter: blur(2px);
-        opacity: var(--lightOpacity);
+        opacity: calc(var(--lightOpacity) * var(--lightIntensity));
     }
 }
 

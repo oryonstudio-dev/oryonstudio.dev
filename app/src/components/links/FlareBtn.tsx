@@ -4,9 +4,13 @@ import Link from 'next/link';
 
 const s = styles;
 
-function ShadowBtn({ children, href, className, ref, style }: LinkProps) {
+interface Props extends LinkProps {
+    prior?: boolean;
+}
+
+function FlareBtn({ children, href, className, ref, style, prior = false }: Props) {
     return (
-        <div className={`${className} ${s.shadowBtn}`}>
+        <div className={`${className} ${s.flareBtn} ${prior ? s.prior : ''}`}>
             <span className={s.glow} />
             <span className={s.flare} />
             <Link
@@ -21,4 +25,4 @@ function ShadowBtn({ children, href, className, ref, style }: LinkProps) {
     );
 }
 
-export default ShadowBtn;
+export default FlareBtn;
