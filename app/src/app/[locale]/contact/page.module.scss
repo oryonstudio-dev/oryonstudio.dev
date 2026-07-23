@@ -15,4 +15,11 @@
         width: 80%;
         margin-inline: auto;
     }
+
+    nav {
+        display: flex;
+        gap: 1rem;
+        margin-inline: auto;
+        width: fit-content;
+    }
 }
