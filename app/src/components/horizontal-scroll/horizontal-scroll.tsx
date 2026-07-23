@@ -12,9 +12,10 @@ gsap.registerPlugin(ScrollTrigger);
 // S E C T I O N
 interface SectionProps extends Children {
     className?: string;
+    id?:        string;
 };
 
-export function HorizontalSection({ children, className }: SectionProps) {
+export function HorizontalSection({ children, className, id }: SectionProps) {
     const sectionRef = useRef<El>(null);
     const wrapperRef = useRef<El.Div>(null);
 
@@ -45,7 +46,7 @@ export function HorizontalSection({ children, className }: SectionProps) {
     }, { scope: sectionRef });
 
     return (
-        <section ref={sectionRef} className={`${s.section} ${className || ''}`}>
+        <section ref={sectionRef} className={`${s.section} ${className || ''}`} id={id}>
             <div ref={wrapperRef} className={s.wrapper}>
                 { children }
             </div>

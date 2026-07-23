@@ -1,8 +1,12 @@
-import styles from './links.module.scss';
+'use client';
+
+import s from './links.module.scss';
 import type { LinkProps } from '@/utils/types';
 import Link from 'next/link';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { gsap } from 'gsap';
 
-const s = styles;
+gsap.registerPlugin(ScrollSmoother);
 
 interface Props extends LinkProps {
     prior?: boolean;

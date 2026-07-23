@@ -21,15 +21,11 @@
             width: 90%;
         }
     }
+}
 
-    nav {
-        display: flex;
-        gap: 1rem;
-        margin-inline: auto;
-        width: fit-content;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin-top: 2rem;
+.form {
+    .question .bgText {
+        height: 95vh;
+        width: auto;
     }
 }
