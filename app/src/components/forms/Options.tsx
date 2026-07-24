@@ -21,7 +21,7 @@ function Options({ children, options, className='', ref }: Props) {
                     <OptionBtn 
                         active={active == i + 1}
                         key={i}
-                        onClick={() => setActive(i + 1)}
+                        onClick={() => active == i + 1 ? setActive(0) : setActive(i + 1)}
                     >
                         { option }
                     </OptionBtn>
