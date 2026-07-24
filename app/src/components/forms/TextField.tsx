@@ -1,17 +1,8 @@
 import s from './forms.module.scss';
 import type { Ref, El } from '@/utils/types';
+import { InputProps } from './types';
 
-interface Props {
-    className?:   string;
-    ref?:         Ref<HTMLInputElement>;
-    name?:        string;
-    type?:        string;
-    required?:    boolean;
-    id?:          string;
-    placeholder?: string;
-}
-
-function TextField({ className = '', ref, name = '', type = 'text', required = false, id = '', placeholder = '' }: Props) {
+function TextField({ className = '', ref, name = '', type = 'text', required = false, id = '', placeholder = '' }: InputProps) {
     return (
         <input className={`${className} ${s.TextField}`} name={name} type={type} required={required} placeholder={placeholder} id={id} ref={ref} />
     )
