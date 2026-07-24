@@ -11,6 +11,7 @@
     color: white;
     transition: 0.5s box-shadow;
     flex-grow: 1;
+    cursor: pointer;
 
     &.active {
         box-shadow:
